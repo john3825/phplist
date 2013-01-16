@@ -10,19 +10,23 @@ General settings for language and database
 
 */
 
+mb_language("Japanese");
+mb_internal_encoding("UTF-8");
+
 
 # select the language module to use
 # Look for <country>.inc files in the texts directory
 # to find your language
 # this is the language for the frontend pages. In the admin pages you can
 # choose your language by using the dropdown in the pages.
-$language_module = "english.inc";
+//$language_module = "english.inc";
+$language_module = "japanese.inc";
 
 # what is your Mysql database server
 $database_host = "localhost";
 
 # what is the name of the database we are using
-$database_name = "phplistdb";
+$database_name = "phplist";
 
 # who do we log in as?
 $database_user = "phplist";
