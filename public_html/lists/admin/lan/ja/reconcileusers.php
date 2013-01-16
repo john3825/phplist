@@ -58,14 +58,14 @@ $lan = array(
   'Date they signed up before' => '次の期間の前に参加表明した日付',
   'Text to prepend to email' => '電子メールの先頭に追加するテキスト',
   'prependemailtext' => '
-悩ませてしまいすいません：私たちのデータベースをクリーンアップしています。
-あなたは以前私たちのメールマガジンに参加表明したようですが、
-購読の確定がされていませんでした。
+申し訳ありません：現在データベースのメンテナンスを実施しております。
+あなた様から以前、メールマガジンへのご登録を頂いておりますが、
+購読本登録の確定がなされておりませんでした。
 
-あなたが購読を再確定する機会をあげたいと思っています。
-どのように確定するか方法は以下に記載しています。
+購読のご意思がございましたら、下記手順に沿って再度確定を
+お願い致します。
   ',
-  'To delete users who signed up and have not confirmed their subscription' => '参加表明したが購読を確定していないユーザに確定のリクエストを削除します。',
+  'To delete users who signed up and have not confirmed their subscription' => '参加表明したが購読を確定していないユーザの確定のリクエストを削除します。',
 
   # new in 2.10.1
   'Delete Tagged Users' => 'Tagged ユーザを削除',
