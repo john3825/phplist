@@ -105,7 +105,7 @@ how well PHPlist is performing.</p></li>
 <?php } ?>
 
 </p>
-<p>あなたのシステムの詳細:</p>
+<p>システムの詳細:</p>
 
 <ul>
 <li>PHPlist version: <?php echo VERSION?></li>

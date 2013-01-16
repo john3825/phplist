@@ -20,7 +20,7 @@ $lan = array(
 /* read lines below as sentences: if you check 'overwrite' information about a user... etc. */
   "If you check" => "次のチェックボックスをチェック → ",
   "Overwrite Existing" => "既存を上書き",
-  "information about a user in the database will be replaced by the imported information. Users are matched by email." => "<br />データベースのユーザの情報はインポートされた情報で置換されます。ユーザは電子メールアドレスによってマッチされます。",
+  "information about a user in the database will be replaced by the imported information. Users are matched by email." => "<br />データベースのユーザの情報はインポートされた情報で置換されます。ユーザはメールアドレスによってマッチされます。",
   "Only use complete addresses" => "完全なアドレスのみを使用",
   "addresses that do not have a real name will be ignored. Otherwise all emails will be imported." => "<br />本当の名前を持っていないアドレスは無視されます。他のすべての電子メールはインポートされます。",
   "If you choose" => "次を選択 → ",

@@ -5,7 +5,7 @@
 
 $lan = array (
   'noaccess' => 'そのようなメッセージはありません、またはあなたはそれにアクセスしません。',
-  'htmlusedwarning' => '警告: あなたはコンテンツをHTMLでないと指定していましたが、いくつかHTMLタグが使われています。これはエラーを起こすかもしれません。',
+  'htmlusedwarning' => '警告: HTMLではないコンテンツと指定しましたが、いくつかHTMLタグが使われています。これはエラーを起こすかもしれません。',
   'adding' => '追加中',
   'longmimetype' => 'Mime Type が255文字以上です。これはトラブルとなります。',
   'addingattachment' => '追加された添付ファイル ',
@@ -22,7 +22,7 @@ $lan = array (
   'duplicateattribute' => 'エラー: 一つのルールのみに１つの属性を使用できます。',
   'selectlist' => 'メッセージを送るリストを選択してください。',
   'notargetemail' => 'No target email addresses listed for testing.',
-  'emailnotfound' => 'テストメッセージを送信するための電子メールアドレスがみつかりませんでした。',
+  'emailnotfound' => 'テストメッセージを送信するためのメールアドレスがみつかりませんでした。',
   'sentemailto' => '次のアドレスにテストメールを送信しました',
   'removedattachment' => '取り除かれた添付ファイル ',
   'existingcriteria' => '既存のクライテリア',

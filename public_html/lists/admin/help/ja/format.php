@@ -18,7 +18,7 @@
 <ul>
 <li>二回連続した改行は &lt;p&gt; （段落）で置換されます。</li>
 <li>単一の改行は &lt;br /&gt; （強制改行）で置換されます。</li>
-<li>電子メールアドレスはクリック可能になります。</li>
+<li>メールアドレスはクリック可能になります。</li>
 <li>URLはクリック可能になります。URLは次の形式になります。<br/>
 <ul><li>http://some.website.url/some/path/somefile.html
 <li>www.websiteurl.com
