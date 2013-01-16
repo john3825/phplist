@@ -9,6 +9,12 @@ include dirname(__FILE__) .'/date.php';
 
 $from = new date("from");
 $to = new date("to");
+$fromval = $from->getDate("from");
+$toval =  $to->getDate("to");
+if (isset($_POST['column'])) {
+  $_POST['column'] = htmlentities($_POST['column']);
+}
+
 if (isset($_REQUEST['list'])) {
   if (isset($_GET['list'])) {
     $list = sprintf('%d',$_GET['list']);
@@ -51,8 +57,6 @@ switch ($access) {
 
 require dirname(__FILE__). '/structure.php';
 if (isset($_POST['process'])) {
-  $fromval= $from->getDate("from");
-  $toval =  $to->getDate("to");
   if ($list)
     $filename = sprintf($GLOBALS['I18N']->get('ExportOnList'),ListName($list),$fromval,$toval,date("Y-M-d"));
   else
@@ -75,6 +79,9 @@ if (isset($_POST['process'])) {
         if (!ereg("sys",$val[1])) {
           print $val[1].$col_delim;
         } elseif (ereg("sysexp:(.*)",$val[1],$regs)) {
+          if ($regs[1] == 'ID') { # avoid freak Excel bug: http://mantis.phplist.com/view.php?id=15526
+            $regs[1] = 'id';
+          }
           print $regs[1].$col_delim;
         }
       }
@@ -115,7 +122,7 @@ if (isset($_POST['process'])) {
     set_time_limit(500);
     reset($_POST['cols']);
     while (list ($key,$val) = each ($_POST['cols']))
-      print strtr($user[$val],$col_delim,",").$col_delim;
+      print strtr($user[htmlentities($val)],$col_delim,",").$col_delim;
     reset($attributes);
     while (list($key,$val) = each ($attributes)) {
       $value = UserAttributeValue($user["id"],$val["id"]);

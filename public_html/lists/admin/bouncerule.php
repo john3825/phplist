@@ -2,18 +2,20 @@
 require_once dirname(__FILE__).'/accesscheck.php';
 
 if (isset($_GET['id'])) {
-  $hash = '#'.$_GET['id'];
+  $hash = '#'.sprintf('%d',$_GET['id']);
+  $id = sprintf('%d',$_GET['id']);
 } else {
   $hash = '';
+  $id = 0;
 }
 
 if (isset($_POST['save']) && $_POST['save']) {
   Sql_Query(sprintf('update %s set regex = "%s",action="%s", comment="%s",status = "%s" where id= %d',
-    $GLOBALS['tables']['bounceregex'],trim($_POST['regex']),$_POST['action'],$_POST['comment'],$_POST['status'],$_GET['id']),1);
+    $GLOBALS['tables']['bounceregex'],trim($_POST['regex']),sql_escape($_POST['action']),sql_escape($_POST['comment']),sql_escape($_POST['status']),$_GET['id']),1);
   $num = Sql_Affected_Rows();
   if ($num < 0) {
     print $GLOBALS['I18N']->get('Updating the regular expression of this rule caused an Sql conflict<br/>This is probably because there is already a rule like that. Do you want to delete this rule instead?');
-    print '<p>'.PageLink2('bouncerules&del='.$_GET['id'],$GLOBALS['I18N']->get('Yes')).'&nbsp;';
+    print '<p>'.PageLink2('bouncerules&del='.$id,$GLOBALS['I18N']->get('Yes')).'&nbsp;';
     print PageLink2('bouncerules',$GLOBALS['I18N']->get('No')).'</p>';
     return;
   }
@@ -21,7 +23,6 @@ if (isset($_POST['save']) && $_POST['save']) {
 }
 
 print '<p>'.PageLink2('bouncerules'.$hash,$GLOBALS['I18N']->get('back to list of bounce rules')).'</p>';
-$id = sprintf('%d',$_GET['id']);
 $data = Sql_Fetch_Array_Query(sprintf('select * from %s where id = %d',
   $GLOBALS['tables']['bounceregex'],$id));
 

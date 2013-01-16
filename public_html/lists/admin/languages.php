@@ -51,8 +51,8 @@ if (!empty($GLOBALS["SessionTableName"])) {
 
 if (isset($_POST['setlanguage']) && $_POST['setlanguage'] && is_array($LANGUAGES[$_POST['setlanguage']])) {
   $_SESSION['adminlanguage'] = array(
-    "info" => $_POST['setlanguage'],
-    "iso" => $_POST['setlanguage'],
+    "info" => htmlentities($_POST['setlanguage']),
+    "iso" => htmlentities($_POST['setlanguage']),
     "charset" => $LANGUAGES[$_POST['setlanguage']][1],
   );
 }
@@ -92,7 +92,6 @@ if (!isset($_SESSION['adminlanguage']) || !is_array($_SESSION['adminlanguage']))
 
 ## this interferes with the frontend if an admin is logged in. 
 ## better split the frontend and backend charSets at some point
-##http://mantis.tincan.co.uk/view.php?id=5528
 #if (!isset($GLOBALS['strCharSet'])) {
   $GLOBALS['strCharSet'] = $_SESSION['adminlanguage']['charset'];
 #

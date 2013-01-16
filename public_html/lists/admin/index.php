@@ -102,6 +102,14 @@ if ($GLOBALS["commandline"]) {
     clineUsage(" [other parameters]");
     exit;
   }
+} else {
+  if (CHECK_REFERRER && isset($_SERVER['HTTP_REFERER'])) {
+    ## do a crude check on referrer. Won't solve everything, as it can be faked, but shouldn't hurt
+    $ref = parse_url($_SERVER['HTTP_REFERER']);
+    if ($ref['host'] != $_SERVER['HTTP_HOST'] && !in_array($ref['host'],$allowed_referrers)) {
+      print 'Access denied';exit;
+    }
+  }
 }
 
 # fix for old PHP versions, although not failsafe :-(
@@ -167,7 +175,7 @@ if (isset($GLOBALS["require_login"]) && $GLOBALS["require_login"]) {
       $_SESSION["adminloggedin"] = "";
       $_SESSION["logindetails"] = "";
       $page = "login";
-      logEvent(sprintf($GLOBALS['I18N']->get('invalid login from %s, tried logging in as %s'),$_SERVER['REMOTE_ADDR'],$_REQUEST["login"]));
+      logEvent(sprintf($GLOBALS['I18N']->get('invalid login from %s, tried logging in as %s'),$_SERVER['REMOTE_ADDR'],sql_escape($_REQUEST["login"])));
       $msg = $loginresult[1];
     } else {
       $_SESSION["adminloggedin"] = $_SERVER["REMOTE_ADDR"];
@@ -178,6 +186,10 @@ if (isset($GLOBALS["require_login"]) && $GLOBALS["require_login"]) {
       );
       if ($_POST["page"] && $_POST["page"] != "") {
         $page = $_POST["page"];
+        $page = preg_replace('/\W/','',$page);
+        if (empty($page)) {
+          $page = 'login';
+        }
       }
     }
   } elseif (isset($_REQUEST["forgotpassword"])) {
@@ -278,7 +290,7 @@ if ($page != "login") {
   if (ini_get("register_globals") == "on" && WARN_ABOUT_PHP_SETTINGS) {
     Error($GLOBALS['I18N']->get('It is safer to set Register Globals in your php.ini to be <b>off</b> instead of ').ini_get("register_globals") );
   }
-  if (ini_get("safe_mode") && WARN_ABOUT_PHP_SETTINGS)
+  if (((bool)ini_get("safe_mode") === true ) && WARN_ABOUT_PHP_SETTINGS)
     Warn($GLOBALS['I18N']->get('safemodewarning'));
 
     /* this needs checking 
@@ -349,7 +361,7 @@ if (checkAccess($page,"") || $page == 'about') {
 
     if (!$parses_ok) {
       print Error("cannot parse $include");
-      print '<p>Sorry, an error occurred. This is a bug. Please <a href="http://mantis.tincan.co.uk">report the bug to the Bug Tracker</a><br/>Sorry for the inconvenience</a></p>';
+      print '<p>Sorry, an error occurred. This is a bug. Please <a href="http://mantis.phplist.com">report the bug to the Bug Tracker</a><br/>Sorry for the inconvenience</a></p>';
     } else {
       if (isset($GLOBALS['developer_email'])) {
         include $include;

@@ -57,8 +57,8 @@ if (!$_POST["remote_host"] ||
   <tr><td>'.$GLOBALS['I18N']->get('database').'</td><td><input type=text name="remote_database" value="%s" size=30></td></tr>
   <tr><td>'.$GLOBALS['I18N']->get('table_prefix').'</td><td><input type=text name="remote_prefix" value="%s" size=30></td></tr>
   <tr><td>'.$GLOBALS['I18N']->get('usertable_prefix').'</td><td><input type=text name="remote_userprefix" value="%s" size=30></td></tr>
-  ',$_POST["remote_server"],$_POST["remote_user"],$_POST["remote_password"],
-  $_POST["remote_database"],$_POST["remote_prefix"],$_POST["remote_userprefix"]);
+  ',htmlentities($_POST["remote_server"]),htmlentities($_POST["remote_user"]),htmlentities($_POST["remote_password"]),
+  htmlentities($_POST["remote_database"]),htmlentities($_POST["remote_prefix"]),htmlentities($_POST["remote_userprefix"]));
   $c = 0;
   print '<tr><td colspan=2>';
   if (sizeof($available_lists) > 1)
@@ -98,7 +98,7 @@ if (!$_POST["remote_host"] ||
     "user_attribute" => $_POST["remote_userprefix"] . "user_attribute",
     "config" => $_POST["remote_prefix"] . "config",
   );
-  print $GLOBALS['I18N']->get('getting_data').$_POST["remote_database"]."@".$_POST["remote_host"]."<br/>";
+  print $GLOBALS['I18N']->get('getting_data').htmlentities($_POST["remote_database"])."@".htmlentities($_POST["remote_host"])."<br/>";
 
   $version = Sql_Fetch_Row_Query("select value from {$remote_tables["config"]} where item = \"version\"");
   print $GLOBALS['I18N']->get('remote_version')." $version[0]<br/>\n";
@@ -179,7 +179,7 @@ if (!$_POST["remote_host"] ||
         name varchar(255) unique,listorder integer default 0)";
         Sql_Query($query,0);
         connectRemote();
-        $attvalue_req = Sql_Query("select id,name,listorder from ".$_POST["remote_prefix"]."listattr_".$att["tablename"]);
+        $attvalue_req = Sql_Query("select id,name,listorder from ".sql_escape($_POST["remote_prefix"])."listattr_".$att["tablename"]);
         $values = array();
         while ($value = Sql_Fetch_Array($attvalue_req)) {
           array_push($values,$value);
@@ -256,12 +256,12 @@ if (!$_POST["remote_host"] ||
           case "select":
           case "radio":
             $valreq = Sql_Fetch_Row_Query(sprintf('select name from %slistattr_%s where id = %d',
-              $_POST["remote_prefix"],$att["tablename"],$att["value"]));
+              sql_escape($_POST["remote_prefix"]),$att["tablename"],$att["value"]));
             $value = $valreq[0];
             break;
           case "checkboxgroup":
             $valreq = Sql_Query(sprintf('select name from %slistattr_%s where id in (%s)',
-              $_POST["remote_prefix"],$att["tablename"],$att["value"]));
+              sql_escape($_POST["remote_prefix"]),$att["tablename"],$att["value"]));
             while ($vals = Sql_fetch_Row($valreq)) {
               $value .= $vals[0].',';
             }

@@ -69,14 +69,18 @@ if (!defined('FORWARD_EMAIL_COUNT') ) define('FORWARD_EMAIL_COUNT',1);
 if (FORWARD_EMAIL_COUNT < 1) {Error('FORWARD_EMAIL_COUNT must be > (int) 0');}
 # allows FORWARD_EMAIL_COUNT forwards per user per period in mysql interval terms default one day  
 if (!defined('FORWARD_EMAIL_PERIOD') ) define('FORWARD_EMAIL_PERIOD', '1 day');
+if (!defined('SEND_QUEUE_PROCESSING_REPORT')) define('SEND_QUEUE_PROCESSING_REPORT',true);
 if (!defined('FORWARD_PERSONAL_NOTE_SIZE')) define('FORWARD_PERSONAL_NOTE_SIZE',0);
 if (!defined('FORWARD_FRIEND_COUNT_ATTRIBUTE')) define('FORWARD_FRIEND_COUNT_ATTRIBUTE','');
 if (!defined('EMBEDUPLOADIMAGES')) define('EMBEDUPLOADIMAGES',0);
 if (!defined('IMPORT_FILESIZE'))  define('IMPORT_FILESIZE',1);
+if (!defined('CHECK_REFERRER')) define('CHECK_REFERRER',false);
 if (!defined("EMAIL_ADDRESS_VALIDATION_LEVEL")) define("EMAIL_ADDRESS_VALIDATION_LEVEL",1); 
 if (!isset($GLOBALS["export_mimetype"])) $GLOBALS["export_mimetype"] = 'application/csv';
 if (!isset($GLOBALS["admin_auth_module"])) $GLOBALS["admin_auth_module"] = 'phplist_auth.inc';
 if (!isset($GLOBALS["require_login"])) $GLOBALS["require_login"] = 0;
+
+if (!isset($allowed_referrers)) $allowed_referrers = array();
 
 if (!defined("WORKAROUND_OUTLOOK_BUG") && defined("USE_CARRIAGE_RETURNS")) {
   define("WORKAROUND_OUTLOOK_BUG",USE_CARRIAGE_RETURNS);
@@ -117,6 +121,8 @@ ini_set('error_prepend_string','<P><font color=red style=\"{font-size: 12px}\">S
   Please <a href="http://mantis.phplist.com">report a bug</a> when reporting the bug, please include URL and the entire content of this page.<br/>');
 
 function listName($id) {
+  $id = sprintf('%d',$id);
+  if (empty($id)) return '';
   global $tables;
   $req = Sql_Fetch_Row_Query(sprintf('select name from %s where id = %d',$tables["list"],$id));
   return $req[0] ? stripslashes($req[0]) : $GLOBALS['I18N']->get('Unnamed List');
@@ -341,8 +347,20 @@ function clean2 ($value) {
   return $value;
 }
 
+function cleanEmail ($value) {
+  $value = trim($value);
+  $value = preg_replace("/\r/","",$value);
+  $value = preg_replace("/\n/","",$value);
+  $value = preg_replace('/"/',"&quot;",$value);
+  ## these are allowed in emails
+//  $value = preg_replace("/'/","&rsquo;",$value);
+  $value = preg_replace("/`/","&lsquo;",$value);
+  $value = stripslashes($value);
+  return $value;
+}
+
 if (TEST && REGISTER)
-  $pixel = '<img src="http://phplist.tincan.co.uk/images/pixel.gif" width=1 height=1>';
+  $pixel = '<img src="http://powered.phplist.com/images/pixel.gif" width=1 height=1>';
 
 
 function timeDiff($time1,$time2) {
@@ -462,9 +480,10 @@ function logEvent($msg) {
   } else {
     $p = 'unknown page';
   }
+  $p = removeXss($p);
   if (Sql_Table_Exists($tables["eventlog"]))
   Sql_Query(sprintf('insert into %s (entered,page,entry) values(now(),"%s","%s")',$tables["eventlog"],
-    $p,addslashes($msg)));
+    sql_escape($p),htmlspecialchars(sql_escape($msg))));
 }
 
 ### process locking stuff
@@ -700,6 +719,8 @@ function cleanUrl($url,$disallowed_params = array('PHPSESSID')) {
 #    $uri .= '?p='.$params['p'];
 #  }
   $uri .= !empty($parsed['fragment']) ? '#'.$parsed['fragment'] : '';
+  ## 16597 - URLs shouldn't have ", so take them out
+  $uri = trim($uri,'"');
   return $uri;
 }
 
