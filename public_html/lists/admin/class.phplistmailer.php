@@ -29,16 +29,16 @@ class PHPlistMailer extends PHPMailer {
       $this->addCustomHeader("X-Mailer: phplist v".VERSION);
       $this->addCustomHeader("X-MessageID: $messageid");
       $this->addCustomHeader("X-ListMember: $email");
-      $this->addCustomHeader("Precedence: bulk");
+#      $this->addCustomHeader("Precedence: bulk"); #http://mantis.phplist.com/view.php?id=15562
       $this->CharSet = getConfig("html_charset");
 
       if (defined('PHPMAILERHOST') && PHPMAILERHOST != '') {
         //logEvent('Sending email via '.PHPMAILERHOST);
-        $this->SMTPAuth = true;
         $this->Helo = getConfig("website");
         $this->Host = PHPMAILERHOST;
         if ( isset($GLOBALS['phpmailer_smtpuser']) && $GLOBALS['phpmailer_smtpuser'] != ''
              && isset($GLOBALS['phpmailer_smtppassword']) && $GLOBALS['phpmailer_smtppassword']) {
+          $this->SMTPAuth = true;
           $this->Username = $GLOBALS['phpmailer_smtpuser'];
           $this->Password = $GLOBALS['phpmailer_smtppassword'];
         }
@@ -82,22 +82,21 @@ class PHPlistMailer extends PHPMailer {
     	$this->addTimeStamp($sTimeStamp);      
     }
     
-    
-    function add_text($text) {
+   function add_text($text) {
       if (!$this->Body) {
         $this->IsHTML(false);
-        $this->Body = html_entity_decode($text ,ENT_QUOTES, 'UTF-8' ); #$text;
+        $this->Body = html_entity_decode($text ,ENT_QUOTES, getConfig("text_charset") ); #$text;
 #        $this->Body = $text;
        } else {
-        $this->AltBody = html_entity_decode($text ,ENT_QUOTES, 'UTF-8' );#$text;
+        $this->AltBody = html_entity_decode($text ,ENT_QUOTES, getConfig("text_charset") );#$text;
       }
     }
 
     function append_text($text) {
       if ($this->AltBody) {
-        $this->AltBody .= html_entity_decode($text ,ENT_QUOTES, 'UTF-8' );#$text;
+        $this->AltBody .= html_entity_decode($text ,ENT_QUOTES, getConfig("text_charset") );#$text;
       } else {
-        $this->Body .= html_entity_decode($text."\n" ,ENT_QUOTES, 'UTF-8' );#$text;
+        $this->Body .= html_entity_decode($text."\n" ,ENT_QUOTES, getConfig("text_charset") );#$text;
       }
     }
 
