@@ -74,7 +74,7 @@ $defaultfooter = '
 
 <tr>
 <td bgcolor="#000000"><img height=1 alt="" src="images/transparent.png" width=1 border=0></td>
-<td bgcolor="#ff9900" class="bottom">&copy; <a href="http://tincan.co.uk" target="_tincan" class="urhere">tincan limited</a> | <a class="urhere" href="http://www.phplist.com" target="_blank">phplist</a> - version <?php echo VERSION?></td>
+<td bgcolor="#ff9900" class="bottom">&copy; <a href="http://phplist.com" target="_phplist" class="urhere">phpList limited</a> | <a class="urhere" href="http://www.phplist.com" target="_blank">phplist</a></td>
 <td bgcolor="#000000"><img height=1 alt="" src="images/transparent.png" width=1 border=0></td>
 </tr>
 
@@ -98,15 +98,11 @@ $defaultfooter = '
 </body></html>
 ';
 
-if (is_file("../config/header.inc")) {
-	$fd = fopen("../config/header.inc", "r");
-	$defaultheader = fread($fd, filesize("../config/header.inc"));
-	fclose($fd);
+if (is_file(dirname(__FILE__)."/../config/header.inc")) {
+	$defaultheader = file_get_contents(dirname(__FILE__)."/../config/header.inc");
 }
-if (is_file("../config/footer.inc")) {
-	$fd = fopen("../config/footer.inc", "r");
-	$defaultfooter = fread($fd, filesize("../config/footer.inc"));
-	fclose($fd);
+if (is_file(dirname(__FILE__)."/../config/footer.inc")) {
+	$defaultfooter = file_get_contents(dirname(__FILE__)."/../config/footer.inc");
 }
 
 if (isset ($_SERVER['HTTP_HOST'])) {
@@ -127,35 +123,35 @@ $default_config = array (
   # what is your website location (url)
 "website" => array (
   $D_website,
-  "ウェブサイトアドレス（http://不要）",
+  "Website address (without http://)",
   "text"
 ),
 
   # what is your domain (for sending emails)
 "domain" => array (
   $D_domain,
-  "送信元ドメイン名（あなたのドメイン名）",
+  "Domain Name of your server (for email)",
   "text"
 ),
 
   # admin address is the person who is in charge of this system
 "admin_address" => array (
   'webmaster@[DOMAIN]',
-  "システム管理者メールアドレス",
+  "Person in charge of this system (one email address)",
   "text"
 ),
 
   # how often to check for new versions of PHPlist
 "check_new_version" => array (
   "7",
-  "新バージョンをチェックする間隔（日）",
+  "How often do you want to check for a new version of phplist (days)",
   "text"
 ),
 
   # admin addresses are other people who receive copies of subscriptions
 "admin_addresses" => array (
   '',
-  "システム通知をCCで受信したい全てのメールアドレス（カンマで区切って入力）",
+  "List of people to CC in system emails (separate by commas)",
   "text",
   1
 ),
@@ -163,27 +159,27 @@ $default_config = array (
   # report address is the person who gets the reports
 "report_address" => array (
   'listreports@[DOMAIN]',
-  "レポート通知を受信したいメールアドレス（カンマで区切って入力）",
+  "Who gets the reports (email address, separate multiple emails with a comma)",
   "text"
 ),
 
   # where will messages appear to come from
 "message_from_address" => array (
   "noreply@[DOMAIN]",
-  "システム通知メールのFrom（送信者）メールアドレス",
+  "From email address for system messages",
   "text"
 ),
 
 "message_from_name" => array (
   "Webmaster",
-  "システム通知メールの送信者名",
+  "What name do system messages appear to come from",
   "text"
 ),
 
   # what is the reply-to on messages?
 "message_replyto_address" => array (
   "noreply@[DOMAIN]",
-  "システム通知メールのreply-toメールアドレス",
+  "Reply-to email address for system messages",
   "text"
 ),
 
@@ -191,43 +187,43 @@ $default_config = array (
   # subscribe users who sign up
 "hide_single_list" => array (
   "1",
-  "アクティブリストが一つの場合は、アクティブリストを表示せずに
-   自動的にアクティブリストに追加します (0/1)",
+  "if there is only one visible list, should it be hidden in the page and automatically
+    subscribe users who sign up (0/1)",
   "boolean"
 ),
 
   # width of a textline field
 "textline_width" => array (
   "40",
-  "テキストボックスの幅",
+  "width of a textline field (numerical)",
   "text"
 ),
 
   # dimensions of a textarea field
 "textarea_dimensions" => array (
   "10,40",
-  "テキストエリアの大きさ (行,列)",
+  "dimensions of a textarea field (rows,columns)",
   "text"
 ),
 
   # send copies of subscribe, update unsubscribe messages to the administrator
 "send_admin_copies" => array (
   "0",
-  "システム管理者へ購読、購読更新、購読解除のメッセージのコピーを送信する (0/1)",
+  "Does the admin get copies of subscribe, update and unsubscribe messages (0/1)",
   "boolean"
 ),
 
   # the main subscribe page, when there are multiple
 "defaultsubscribepage" => array (
   1,
-  "デフォルト購読ページ",
+  "The default subscribe page when there are multiple",
   "text"
 ),
 
   # the default template for sending an html message
 "defaultmessagetemplate" => array (
   0,
-  "メール送信時のデフォルトHTMLテンプレート",
+  "The default HTML template to use when sending a message",
   "text"
 ),
 
@@ -238,14 +234,14 @@ $default_config = array (
   # the location of your subscribe script
 "subscribeurl" => array (
   $GLOBALS['scheme'] . "://[WEBSITE]$pageroot/?p=subscribe",
-  "購読ページURL",
+  "URL where users can subscribe",
   "text"
 ),
 
   # the location of your unsubscribe script:
 "unsubscribeurl" => array (
   $GLOBALS['scheme'] . "://[WEBSITE]$pageroot/?p=unsubscribe",
-  "購読解除ページURL",
+  "URL where known users can unsubscribe",
   "text"
 ),
 
@@ -253,28 +249,28 @@ $default_config = array (
   # the location of your blacklist script:
 "blacklisturl" => array (
   $GLOBALS['scheme'] . "://[WEBSITE]$pageroot/?p=blacklist",
-  "未知のユーザの購読解除ページURL (blacklist)",
+  "URL where unknown users can unsubscribe (blacklist)",
   "text"
 ),
 
 # the location of your confirm script:
 "confirmationurl" => array (
   $GLOBALS['scheme'] . "://[WEBSITE]$pageroot/?p=confirm",
-  "購読登録確定ページURL",
+  "URL where users have to confirm their subscription",
   "text"
 ),
 
   # url to change their preferences
 "preferencesurl" => array (
   $GLOBALS['scheme'] . "://[WEBSITE]$pageroot/?p=preferences",
-  "購読情報更新ページURL",
+  "URL where users can update their details",
   "text"
 ),
 
   # url to change their preferences
 "forwardurl" => array (
   $GLOBALS['scheme'] . "://[WEBSITE]$pageroot/?p=forward",
-  "メール転送ページURL",
+  "URL where messages can be forwarded",
   "text"
 ),
 
@@ -284,8 +280,8 @@ $default_config = array (
 
   # the subject of the message
 "subscribesubject" => array (
-  "メールマガジン本登録のお願い",
-  "購読登録した際にユーザが受信するメールのタイトル",
+  "Request for confirmation",
+  "Subject of the message users receive when they subscribe",
   "text"
 ),
 
@@ -296,53 +292,58 @@ $default_config = array (
 "subscribemessage" => array (
   '
 
-  下記、メールマガジンへのご登録ありがとうございました。
+  Almost welcome to our newsletter(s) ...
 
-[LISTS]
+  Someone, hopefully you, has subscribed your email address to the following newsletters:
+  
+  [LISTS]
 
-  本登録を完了するために下記URLリンクをクリックしてください。
-  本登録が完了するまで、メールマガジンは配信されません。
+  If this is correct, please click the following link to confirm your subscription.
+  Without this confirmation, you will not receive any newsletters.
+  
+  [CONFIRMATIONURL]
+  
+  If this is not correct, you do not need to do anything, simply delete this message.
 
-[CONFIRMATIONURL]
-
-　ありがとうございました。
-　
-　本メールにお心当たりのない方は、本メールは削除してください。
-
+  Thank you
   
     ',
-  "購読登録した際にユーザが受信するメール本文",
+  "Message users receive when they subscribe",
   "textarea"
 ),
 
   # subject of the message when they unsubscribe
 "unsubscribesubject" => array (
-  "メールマガジン購読解除のご連絡",
-  "購読解除した際にユーザが受信するメールのタイトル",
+  "Goodbye from our Newsletter",
+  "Subject of the message users receive when they unsubscribe",
   "text"
 ),
 
   # message that is sent when they unsubscribe
 "unsubscribemessage" => array (
   '
+  Goodbye from our Newsletter, sorry to see you go.
 
-  メールマガジン購読解除手続きを行いました。
+  You have been unsubscribed from our newsletters.
 
-　メールマガジン購読の再登録を行われたい場合は、下記URLリンクより、再度お手続きください。
+  This is the last email you will receive from us. We have added you to our
+  "do not send list", which means that our newsletter system, phpList, will
+  not send you any further messages, without manual intervention by our administrator.
 
-　[SUBSCRIBEURL]
+  If there is an error in this information, you can re-subscribe:
+  please go to [SUBSCRIBEURL] and follow the steps.
 
-  ありがとうございました。
-
+  Thank you
+  
   ',
-  "購読解除した際にユーザが受信するメール本文",
+  "Message users receive when they unsubscribe",
   "textarea"
 ),
 
   # confirmation of subscription
 "confirmationsubject" => array (
-  'メールマガジン本登録完了しました',
-  "購読本登録完了した際にユーザが受信するメールのタイトル",
+  'Welcome to our Newsletter',
+  "Subject of the message users receive after confirming their email address",
   "text"
 ),
 
@@ -350,33 +351,27 @@ $default_config = array (
 "confirmationmessage" => array (
   '
   
+  Welcome to our Newsletter
+
+  Please keep this message for later reference.
+
+  Your email address has been added to the following newsletter(s):
   [LISTS]
-  メールマガジンへようこそ。
 
-  本メールは、メールマガジン登録情報の更新や購読解除の際の手続きの
-  ご案内になっておりますので、大切に保管して頂けますようお願いいたします。
+  To update your details and preferences please go to [PREFERENCESURL].
+  If you do not want to receive any more messages, please go to [UNSUBSCRIBEURL].
 
-  あなたの購読しているメールマガジンは下記の通りです。
-[LISTS]
-
-  ご登録情報の修正が必要な場合は、下記URLリンクよりお手続きください。
-  [PREFERENCESURL]
-  
-  メールマガジンの購読を中止したい場合は、下記URLリンクよりお手続きください。
-  [UNSUBSCRIBEURL]
-
-  本登録ありがとうございました。
-
+  Thank you
   
   ',
-  "購読本登録が完了した際にユーザが受信するメール本文",
+  "Message users receive after confirming their email address",
   "textarea"
 ),
 
   # the subject of the message sent when changing the user details
 "updatesubject" => array (
-  "[購読情報更新のご案内] メールマガジンご登録情報が更新されました",
-  "購読情報更新の際にユーザが受信するメールのタイトル",
+  "[notify] Change of List-Membership details",
+  "Subject of the message users receive when they have changed their details",
   "text"
 ),
 
@@ -386,26 +381,27 @@ $default_config = array (
   # userdata is replaced by the information in the database
 "updatemessage" => array (
   '
-  メールマガジンご登録情報が更新されました。
-　現在ご購読中のメールマガジンは、下記の通りです。
+  
+  This message is to inform you of a change of your details on our newsletter database
 
-[LISTS]
-
-[CONFIRMATIONINFO]
-
-  ご登録情報は下記の通りです。
-
-[USERDATA]
-
-  ご購読メールマガジン、ご登録情報に誤りがある場合は、下記URLリンクより修正を
-  行ってください。
-
-[PREFERENCESURL]
-
-  ありがとうございました。
-
+  You are currently member of the following newsletters:
+  
+  [LISTS]
+  
+  [CONFIRMATIONINFO]
+  
+  The information on our system for you is as follows:
+  
+  [USERDATA]
+  
+  If this is not correct, please update your information at the following location:
+  
+  [PREFERENCESURL]
+  
+  Thank you
+  
     ',
-  "購読情報更新の際にユーザが受信するメール本文",
+  "Message that is sent when users change their information",
   "textarea"
 ),
 
@@ -414,15 +410,13 @@ $default_config = array (
   # their email address
 "emailchanged_text" => array (
   '
-  ご登録情報を変更された際にメールアドレスが修正されました。
-  このため、メールアドレスの確認が必要となります。
-  お手数ですが、下記URLリンクをクリックして、メールアドレスの変更を
-  完了してください。
-
-[CONFIRMATIONURL]
-
+  When updating your details, your email address has changed.
+  Please confirm your new email address by visiting this webpage:
+  
+  [CONFIRMATIONURL]
+  
   ',
-  "購読情報更新の際にメールアドレス変更が含まれる場合の新しいメールアドレスへの部分通知文",
+  "Part of the message that is sent to their new email address when users change their information, and the email address has changed",
   "textarea"
 ),
 
@@ -431,72 +425,71 @@ $default_config = array (
   # their email address
 "emailchanged_text_oldaddress" => array (
   '
-  ご登録情報を変更された際にメールアドレスが修正されました。
-  このため、メールアドレスの確認が必要となります。
-  お手数ですが、新しいメールアドレスの受信メールをご確認の上、
-  メールアドレスの変更を完了してください。
+  Please Note: when updating your details, your email address has changed.
+
+  A message has been sent to your new email address with a URL
+  to confirm this change. Please visit this website to activate
+  your membership.
   ',
-  "購読情報更新の際にメールアドレス変更が含まれる場合の古いメールアドレスへの部分通知文",
+  "Part of the message that is sent to their old email address when users change their information, and the email address has changed",
   "textarea"
 ),
 
 "personallocation_subject" => array (
-  'ご登録情報更新お手続きのご案内',
-  "ユーザが登録情報更新手続きを求める際に送信するメールのタイトル",
+  'Your personal location',
+  "Subject of message to send when users request their personal location",
   "text"
 ),
 
 "personallocation_message" => array (
   '
   
-ご登録情報を更新のためのお手続きをご案内します。。
-下記に記載されるURLリンクより、お手続きを行ってください。
-URLリンクは複数行に改行されて表示されることがありますが、全て1行のURLとして
-ご利用ください。
-
-ご登録情報の更新お手続きはこちらから
-[PREFERENCESURL]
-
-ご利用ありがとうございました。
-
+  You have requested your personal location to update your details from our website.
+  The location is below. Please make sure that you use the full line as mentioned below.
+  Sometimes email programme can wrap the line into multiple lines.
+  
+  Your personal location is:
+  [PREFERENCESURL]
+  
+  Thank you.
   ',
-  'ユーザが登録情報更新手続きを求める際に送信するメール本文',
+  'Message to send when they request their personal location',
   "textarea"
 ),
 
 "messagefooter" => array (
   "--\n$strToUnsubscribe [UNSUBSCRIBE]\n\n$strToUpdate [PREFERENCES]\n$strForwardTitle [FORWARD]",
-  "メールを送信する際のデフォルトフッタ",
+  "Default footer for sending a message",
   "textarea"
 ),
 
 "forwardfooter" => array (
   "--\n$strForwardFooter\n\n [SUBSCRIBE]\nClick [BLACKLIST] to refuse further email from this website",
 
-  "メールが転送される際のフッタ",
+  "Footer used when a message has been forwarded",
   "textarea"
 ),
 
 "pageheader" => array (
   $defaultheader,
-  "通常ページのヘッダ. ヘッダは必ず &lt;/head&gt; で書き始めてください。ヘッダへタグを追加できますが、titleなど基本的なヘッダタグを追加することはできません。",
+  "Header of public pages. The header should start with &lt;/head&gt; . You can add header elements, but don't add the title or other basic header elements.",
   "textarea"
 ),
 
 "pagefooter" => array (
   $defaultfooter,
-  "通常ページのフッタ",
+  "Footer of public pages",
   "textarea"
 ),
 
 "html_charset" => array (
-  "iso-2022-jp",
-  "HTMLメールの文字コード",
+  "UTF-8",
+  "Charset for HTML messages",
   "text"
 ),
 "text_charset" => array (
-  "iso-2022-jp",
-  "テキストメールの文字コード",
+  "UTF-8",
+  "Charset for Text messages",
   "text"
 ),
 
@@ -520,13 +513,13 @@ URLリンクは複数行に改行されて表示されることがあります�
   div.emailfooter a { font-size: 11px; color: #ff6600; font-style: normal; font-family: verdana, sans-serif; text-decoration: none; }
   </style>
   ',
-  "テンプレートを利用しない際のHTMLメールのスタイルシート設定",
+  "CSS for HTML messages without a template",
   "textarea"
 ),
 
 "alwayssendtextto" => array (
   "mail.com\nemail.com",
-  "テキストメールのみ受信可能なドメイン（1行に1つのドメインを記入してください）",
+  "Domains that only accept text emails, one per line",
   "textarea"
 ),
   # do not do anything with this line
@@ -536,7 +529,7 @@ URLリンクは複数行に改行されて表示されることがあります�
 if (defined("ENABLE_RSS") && ENABLE_RSS) {
   $default_config["rssthreshold"] = array (
     4,
-    "RSSフィードで送る最小数",
+    "Minimum amount of items to send in an RSS feed",
     "text"
   );
   $default_config["rsstexttemplate"] = array (
@@ -545,7 +538,7 @@ if (defined("ENABLE_RSS") && ENABLE_RSS) {
       [description]
       URL: [link]
       ',
-    "RSSフィードでのテキスト情報用テンプレート",
+    "Template for text item in RSS feeds",
     "textarea"
   );
   $default_config["rsshtmltemplate"] = array (
@@ -554,31 +547,31 @@ if (defined("ENABLE_RSS") && ENABLE_RSS) {
       <p>[description]</p>
       <hr/>
       ',
-    "RSSフィードでのHTML情報用テンプレート",
+    "Template for HTML item in RSS feeds",
     "textarea"
   );
   $default_config["rssthreshold"] = array (
     4,
-    "RSSフィードで送る最小数",
+    "Minimum amount of items to send in an RSS feed",
     "text"
   );
   $default_config["rssmax"] = array (
     30,
-    "RSSフィードで送る最大数",
+    "Maximum amount of items to send in an RSS feed",
     "text"
   );
   $default_config["rsstextseparatortemplate"] = array (
     '**** [listname] ******
     
       ',
-    "RSSフィードでのテキスト情報間を区切るテンプレート",
+    "Template for separator between feeds in RSS feeds (text)",
     "textarea"
   );
   $default_config["rsshtmlseparatortemplate"] = array (
     '<br/>
       <h3>[listname]</h3>
       ',
-    "RSSフィードでのHTML情報間を区切るテンプレート",
+    "Template for separator between feeds in RSS feeds (HTML)",
     "textarea"
   );
 
@@ -587,12 +580,12 @@ if (defined("ENABLE_RSS") && ENABLE_RSS) {
 #if (USEFCK) {
 $default_config["fckeditor_width"] = array (
 	600,
-	"FCKeditor編集エリアの幅（ピクセル）",
+	"Width in px of FCKeditor Area",
 	"text"
 );
 $default_config["fckeditor_height"] = array (
 	600,
-	"FCKeditor編集エリアの高さ（ピクセル）",
+	"Height in px of FCKeditor Area",
 	"text"
 );
 #}
@@ -607,7 +600,7 @@ if (!TEST && REGISTER && defined("VERSION")) {
 		$v = "dev";
 	else
 		$v = VERSION;
-	$PoweredBy = '<p align=left><a href="http://www.phplist.com"><img src="http://phplist.tincan.co.uk/images/' . $v . '/power-phplist.png" width=88 height=31 title="powered by phplist" alt="powered by phplist" border="0"></a></p>';
+	$PoweredBy = '<p align=left><a href="http://www.phplist.com"><img src="http://powered.phplist.com/images/' . $v . '/power-phplist.png" width=88 height=31 title="powered by phplist" alt="powered by phplist" border="0"></a></p>';
 } else
 	$PoweredBy = '<center><a href="http://www.phplist.com"><img src="images/power-phplist.png" width=88 height=31 title="powered by phplist" alt="powered by phplist" border="0"></a></center>';
 
@@ -846,4 +839,5 @@ $access_levels = array (
 		#   3 => "edit",
 	4 => "owner"
 );
+include_once(dirname(__FILE__) . '/defaultconfig.ja.inc');
 ?>

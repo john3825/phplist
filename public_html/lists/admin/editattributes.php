@@ -86,13 +86,13 @@ if (isset($_POST["addnew"])) {
 
 if (isset($_POST["listorder"]) && is_array($_POST["listorder"])) {
   foreach ($_POST["listorder"] as $key => $val) {
-    Sql_Verbose_Query("update $table set listorder = $val where id = $key");
+    Sql_Query(sprintf('update '.$table.' set listorder = %d where id = %d',$val,$key));
   }
 }
 
 function giveAlternative($table,$delete,$attributeid) {
   print $GLOBALS['I18N']->get('ReplaceAllWith').formStart();
-  print '<select name=replace><option value="0">-- '.$GLOBALS['I18N']->get('ReplaceWith').'</option>';
+  print '<select name="replace"><option value="0">-- '.$GLOBALS['I18N']->get('ReplaceWith').'</option>';
   $req = Sql_Query("select * from $table order by listorder,name");
   while ($row = Sql_Fetch_array($req))
     if ($row["id"] != $delete)
@@ -104,24 +104,24 @@ function giveAlternative($table,$delete,$attributeid) {
 }
 
 function deleteItem($table,$attributeid,$delete) {
-  global $tables,$replace;
+  global $tables;
   # delete the index in delete
-  $valreq = Sql_Fetch_Row_query("select name from $table where id = $delete");
+  $valreq = Sql_Fetch_Row_query(sprintf('select name from '.$table.' where id = %d',$delete));
   $val = $valreq[0];
 
   # check dependencies
   $dependencies = array();
-  $result = Sql_query("select distinct userid from $tables[user_attribute] where
-  attributeid = $attributeid and value = $delete");
+  $result = Sql_query(sprintf('select distinct userid from '.$tables['user_attribute'].' where
+  attributeid = %d and value = %d',$attributeid,$delete));
   while ($row =  Sql_fetch_array($result)) {
     array_push($dependencies,$row["userid"]);
   }
 
   if (sizeof($dependencies) == 0)
-    $result = Sql_query("delete from $table where id = $delete");
-  else if ($replace) {
-    $result = Sql_Query("update $tables[user_attribute] set value = $replace where value = $delete");
-    $result = Sql_query("delete from $table where id = $delete");
+    $result = Sql_query(sprintf('delete from '.$table.' where id = %d',$delete));
+  else if (!empty($_POST['replace'])) {
+    $result = Sql_Query(sprintf('update '.$tables['user_attribute'].' set value = %d where value = %d',$_POST['replace'],$delete));
+    $result = Sql_query(sprintf('delete from '.$table.' where id = %d',$delete));
   } else {
     print $GLOBALS["I18N"]->get("cannotdelete");
     print " <b>$val</b><br />";
