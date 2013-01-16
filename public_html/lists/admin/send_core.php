@@ -16,6 +16,7 @@ if (USEFCK && file_exists("./FCKeditor/fckeditor.php")) {
 } else {
   $usefck = 0;
 }
+$status = 'draft';
 
 // Verify that TinyMCE is available
 $useTinyMCE = 0;
@@ -103,6 +104,11 @@ if ($id) {
     $done = 1;
     return;
   }
+  foreach (array('message', 'msgsubject') as $key) {
+    if (isset($_POST[$key])) {
+     $_POST[$key] = stripslashes($_POST[$key]);
+    }
+  }
   while ($msg = Sql_fetch_array($result)) {
     foreach ($DBstruct["message"] as $field => $rec) {
       if (!isset($_POST[$field])) {
@@ -127,22 +133,22 @@ if ($id) {
   if (!isset($_POST["forwardsubject"])) {
      $_POST["forwardsubject"] = "";
   }
-  else $_POST["forwardsubject"] = sprintf("%s", $_POST["forwardsubject"]);
+  else $_POST["forwardsubject"] = removeXSS($_POST["forwardsubject"]);
 
   if (!isset($_POST["forwardmessage"])) {
      $_POST["forwardmessage"] = "";
   }
-  else $_POST["forwardmessage"] = sprintf("%s", $_POST["forwardmessage"]);
+  else $_POST["forwardmessage"] = removeXSS($_POST["forwardmessage"]);
 
   if (!isset($_POST["forwardfooter"])) {
      $_POST["forwardfooter"] = "";
   }
-  else $_POST["forwardfooter"] = sprintf("%s", $_POST["forwardfooter"]);
+  else $_POST["forwardfooter"] = removeXSS($_POST["forwardfooter"]);
 
   if (!isset($_POST["msgsubject"])) {
-    $_POST["msgsubject"] = sprintf("%s",$_POST["subject"]);
+    $_POST["msgsubject"] = removeXSS($_POST["subject"]);
   } else {
-    $_POST['subject'] = sprintf("%s",$_POST['msgsubject']);
+    $_POST['subject'] = removeXSS($_POST['msgsubject']);
   }
   if ((!isset($_POST["year"]) || !is_array($_POST["year"])) && $_POST["embargo"] && $_POST["embargo"] != "0000-00-00 00:00:00") {
      $embargo->setDateTime($_POST["embargo"]);
@@ -163,13 +169,13 @@ if ($id) {
 // If we've got magic quotes on, then we need to get rid of the slashes - either
 // from the database or from the previous $_POST
 #if (get_magic_quotes_gpc()) {
-  $_POST["msgsubject"] = stripslashes($_POST["msgsubject"]);
-  #0013076: different content when forwarding 'to a friend'
+//  $_POST["msgsubject"] = stripslashes($_POST["msgsubject"]);
+    #0013076: different content when forwarding 'to a friend'
   $_POST["forwardsubject"] = stripslashes($_POST["forwardsubject"]);
   $_POST["from"] = stripslashes($_POST["from"]);
   $_POST["tofield"] = stripslashes($_POST["tofield"]);
   $_POST["replyto"] = stripslashes($_POST["replyto"]);
-  $_POST["message"] = stripslashes($_POST["message"]);
+//  $_POST["message"] = stripslashes($_POST["message"]);
   #0013076: different content when forwarding 'to a friend'
   $_POST["forwardmessage"] = stripslashes($_POST["forwardmessage"]);
   $_POST["textmessage"] = stripslashes($_POST["textmessage"]);
@@ -271,6 +277,7 @@ if ($send || $sendtest || $prepare || $save) {
     } else {
       // Keep the status the same
       $status = $_POST["status"];
+      $status = preg_replace('/\W/','',$status);
     }
   } elseif ($send) {
     // We're sending - change state to "send-it" status!
@@ -328,16 +335,16 @@ if ($send || $sendtest || $prepare || $save) {
       'rsstemplate = "%s"  '.
       'where id  =  %d',
       $tables["message"],
-      addslashes($subject),
-      addslashes($from),
-      addslashes($_POST["tofield"]),
-      addslashes($_POST["replyto"]),
+      sql_escape($subject),
+      sql_escape($from),
+      sql_escape($_POST["tofield"]),
+      sql_escape($_POST["replyto"]),
       $_POST["embargo"],
       $_POST["repeatinterval"],
       $_POST["repeatuntil"],
-      addslashes($_POST["message"]),
-      addslashes($_POST["textmessage"]),
-      addslashes($_POST["footer"]),
+      sql_escape($_POST["message"]),
+      sql_escape($_POST["textmessage"]),
+      sql_escape($_POST["footer"]),
       $status,
       $htmlformatted,
       $_POST["sendformat"],
@@ -389,7 +396,7 @@ if ($send || $sendtest || $prepare || $save) {
   if (FORWARD_ALTERNATIVE_CONTENT && $_GET['tab'] == 'Forward') {
     foreach( array('forwardsubject', 'forwardmessage', 'forwardfooter') as $var) {
       Sql_Query(sprintf('replace into %s (name,id,data) values("%s",%d,"%s")',
-        $tables["messagedata"], $var, $messageid, addslashes($_REQUEST[$var])));
+        $tables["messagedata"], $var, $messageid, sql_escape($_REQUEST[$var])));
     }
   }
 
@@ -653,7 +660,7 @@ if ($send || $sendtest || $prepare || $save) {
 
     foreach ($emailaddresses as $address) {
       $address = trim($address);
-      $result = Sql_query(sprintf('select id,email,uniqid,htmlemail,rssfrequency,confirmed from %s where email = "%s"',$tables["user"],$address));
+      $result = Sql_query(sprintf('select id,email,uniqid,htmlemail,rssfrequency,confirmed from %s where email = "%s"',$tables["user"],sql_escape($address)));
       if ($user = Sql_fetch_array($result)) {
         if ( FORWARD_ALTERNATIVE_CONTENT && $_GET['tab'] == 'Forward') {
           if (SEND_ONE_TESTMAIL) {
@@ -752,7 +759,8 @@ for ($i = 1; $i<=$num;$i++) {
       $attribute = '';
     }
     ## fix 6063
-    $crit_data["values"] = str_replace(" ", "",$crit_data["values"]);
+  #  $crit_data["values"] = str_replace(" ,", "",$crit_data["values"]);
+    $crit_data['values'] = cleanCommaList($crit_data["values"]);
 
     # hmm, rather get is some other way, this is a bit unnecessary
     $type = Sql_Fetch_Row_Query("select type from {$tables["attribute"]} where id = ".$crit_data["attribute"]);
@@ -783,7 +791,7 @@ for ($i = 1; $i<=$num;$i++) {
         }
         $where_clause .= $or_clause . ") ) ";
         $subqueries[$i]['query'] = sprintf('select userid from %s as table%d where attributeid = %d
-          and %s',$GLOBALS['tables']['user_attribute'],$tc,$crit_data['attribute'],$or_clause);
+          and ( %s )',$GLOBALS['tables']['user_attribute'],$tc,$crit_data['attribute'],$or_clause);
         break;
       case "checkbox":
         $value = $crit_data["values"][0];
@@ -808,7 +816,7 @@ for ($i = 1; $i<=$num;$i++) {
 
         $where_clause .= '( '.$valueselect . ') ) ';
         $subqueries[$i]['query'] = sprintf('select userid from %s as table%d where attributeid = %d
-          and %s',$GLOBALS['tables']['user_attribute'],$tc,$crit_data['attribute'],$valueselect);
+          and ( %s )',$GLOBALS['tables']['user_attribute'],$tc,$crit_data['attribute'],$valueselect);
 
         break;
       case "date":
@@ -931,7 +939,7 @@ if (sizeof($subqueries)) {
 
 // Pull in $footer variable from post
 if (isset($_POST["footer"]))
-  $footer = $_POST["footer"];
+  $footer = removeXss($_POST["footer"]);
 
 // If $id wasn't passed in (if it was passed, then $_POST should have
 // the database value in it already, and if it's empty, then we should
@@ -1031,7 +1039,7 @@ if (!$done) {
 // custom code - start
   $utf8_subject = $subject;
   $utf8_from = $from;
-  if (strcasecmp($GLOBALS['strCharSet'], 'utf-8') <> 0) {
+  if (strcasecmp($GLOBALS['strCharSet'], 'utf-8') <> 0 && function_exists('iconv')) {
      $utf8_subject = iconv($GLOBALS['strCharSet'],'UTF-8',$utf8_subject);
      $utf8_from = iconv($GLOBALS['strCharSet'],'UTF-8',$utf8_from);
   }
@@ -1039,13 +1047,13 @@ if (!$done) {
   $maincontent .= '
   <tr><td>'.Help("subject").' '.$GLOBALS['I18N']->get("Subject").':</td>
     <td><input type=text name="msgsubject"
-    value="'.htmlentities($subject,ENT_QUOTES,'UTF-8').'" size=40></td></tr>
+    value="'.htmlentities($utf8_subject,ENT_QUOTES,'UTF-8').'" size=40></td></tr>
   <tr>
     <td colspan=2>
     </td></tr>
   <tr><td>'.Help("from").' '.$GLOBALS['I18N']->get("fromline").':</td>
     <td><input type=text name=from
-   value="'.htmlentities($from,ENT_QUOTES,'UTF-8').'" size=40></td></tr>
+   value="'.htmlentities($utf8_from,ENT_QUOTES,'UTF-8').'" size=40></td></tr>
   <tr><td colspan=2>
 
   </td></tr>';
@@ -1171,7 +1179,8 @@ if (!$done) {
     $oFCKeditor->BasePath = './FCKeditor/';
     //$oFCKeditor->ToolbarSet = 'Accessibility' ;
     $oFCKeditor->ToolbarSet = 'Default' ;
-    $oFCKeditor->Value = stripslashes($_POST["message"]);
+//    $oFCKeditor->Value = stripslashes($_POST["message"]);
+    $oFCKeditor->Value = $_POST["message"];
     $w = getConfig("fckeditor_width");
     $h = getConfig("fckeditor_height");
     if ($_SESSION["fckeditor_height"]) {
@@ -1330,6 +1339,10 @@ if (!$done) {
   // if there isn't one, load the developer one, just being lazy here :-)
   if (!$_POST["testtarget"]) {
     $_POST["testtarget"] = $GLOBALS["developer_email"];
+  }
+  ## sanitise the target
+  if (!is_email($_POST['testtarget'])) {
+    $_POST['testtarget'] = '';
   }
 
   // Display the HTML for the "Send Test" button, and the input field for the email addresses
@@ -1646,15 +1659,14 @@ if (!$done) {
 }
 print $sendtest_content;
 
-if (!$_POST["status"]) {
+if (empty($_POST["status"])) {
   $savecaption = $GLOBALS['I18N']->get('saveasdraft');
 } else {
   $savecaption = $GLOBALS['I18N']->get('savechanges');#"Save &quot;".$_POST["status"]."&quot; message edits";
-
 }
 print "<hr><table><tr><td><input type=submit name=\"save\" value=\"$savecaption\"></td></tr></table>\n<hr>\n";
 print "<input type=hidden name=id value=$id>\n";
-print "<input type=hidden name=status value=\"".$_POST["status"]."\">\n";
+print "<input type=hidden name=status value=\"".$status."\">\n";
 print '<input type=hidden name=expand value="0">';
 
 ?>
