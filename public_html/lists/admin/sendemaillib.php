@@ -140,7 +140,6 @@ function sendEmail ($messageid,$email,$hash,$htmlpref = 0,$rssitems = array(),$f
   $text["subscribe"] = sprintf('%s',$url);
   $html["subscribeurl"] = sprintf('%s',$url);
   $text["subscribeurl"] = sprintf('%s',$url);
-  #?mid=1&id=1&uid=a9f35f130593a3d6b89cfe5cfb32a0d8&p=forward&email=michiel%40tincan.co.uk&
   $url = getConfig("forwardurl");$sep = ereg('\?',$url)?'&':'?';
   $html["forward"] = sprintf('<a href="%s%suid=%s&mid=%d">%s</a>',$url,$sep,$hash,$messageid,$strThisLink);
   $text["forward"] = sprintf('%s%suid=%s&mid=%d',$url,$sep,$hash,$messageid);
@@ -149,7 +148,7 @@ function sendEmail ($messageid,$email,$hash,$htmlpref = 0,$rssitems = array(),$f
   $url = getConfig("forwardurl");
   # make sure there are no newlines, otherwise they get turned into <br/>s
   $html["forwardform"] = sprintf('<form method="get" action="%s" name="forwardform" class="forwardform"><input type=hidden name="uid" value="%s" /><input type=hidden name="mid" value="%d" /><input type=hidden name="p" value="forward" /><input type=text name="email" value="" class="forwardinput" /><input name="Send" type="submit" value="%s" class="forwardsubmit"/></form>',$url,$hash,$messageid,$GLOBALS['strForward']);
-  $text["signature"] = "\n\n--\nPowered by PHPlist, www.phplist.com --\n\n";
+  $text["signature"] = "\n\n--\npowered by phpList, www.phplist.com --\n\n";
   $url = getConfig("preferencesurl");$sep = ereg('\?',$url)?'&':'?';
   $html["preferences"] = sprintf('<a href="%s%suid=%s">%s</a>',$url,$sep,$hash,$strThisLink);
   $text["preferences"] = sprintf('%s%suid=%s',$url,$sep,$hash);
@@ -164,7 +163,7 @@ function sendEmail ($messageid,$email,$hash,$htmlpref = 0,$rssitems = array(),$f
   You can configure how the credits are added to your pages and emails in your
   config file.
 
-  Michiel Dethmers, Tincan Ltd 2003, 2004, 2005, 2006
+  Michiel Dethmers, phpList Ltd 2003, 2004, 2005, 2006
 */
   if (!EMAILTEXTCREDITS) {
     $html["signature"] = $PoweredByImage;#'<div align="center" id="signature"><a href="http://www.phplist.com"><img src="powerphplist.png" width=88 height=31 title="Powered by PHPlist" alt="Powered by PHPlist" border="0"></a></div>';
@@ -442,7 +441,7 @@ function sendEmail ($messageid,$email,$hash,$htmlpref = 0,$rssitems = array(),$f
         $link = substr($link,0,-1);
       }
       $linkid = 0;
-#      print "LINK: $link<br/>";
+ #     print "LINK: ".htmlspecialchars($link)."<br/>";
       if ((preg_match('/^http|ftp/',$link) || preg_match('/^http|ftp/',$urlbase)) && $link != 'http://www.phplist.com' && !strpos($link,$clicktrack_root)) {
         # take off personal uids
         $url = cleanUrl($link,array('PHPSESSID','uid'));
@@ -477,7 +476,7 @@ if (0) {
 #    preg_match_all('!(https?:\/\/www\.[a-zA-Z0-9\.\/#~\?+=&%@-_]+)!mis',$textmessage,$links);
 
     for($i=0; $i<count($links[1]); $i++){
-      # not entirely sure why strtolower was used, but it seems to break things http://mantis.tincan.co.uk/view.php?id=4406
+      # not entirely sure why strtolower was used, but it seems to break things http://mantis.phplist.com/view.php?id=4406
 #      $link = strtolower(cleanUrl($links[1][$i]));
       $link = cleanUrl($links[1][$i]);
       if (preg_match('/\.$/',$link)) {
@@ -506,7 +505,7 @@ if (0) {
     # or secure
     #https://user:password@www.website.com:2345/document.php?parameter=something%20&otherpar=somethingelse#anchor
 
-    preg_match_all('#(https?://[^\s\>\}\,]+)#mis',$textmessage,$links);
+    preg_match_all('#(https?://[^\s\>\}\,\"]+)#mis',$textmessage,$links);
 #    preg_match_all('#(https?://[a-z0-9\./\#\?&:@=%\-]+)#ims',$textmessage,$links);
 #    preg_match_all('!(https?:\/\/www\.[a-zA-Z0-9\.\/#~\?+=&%@-_]+)!mis',$textmessage,$links);
     ## sort the results in reverse order, so that they are replaced correctly
@@ -518,6 +517,7 @@ if (0) {
       if (preg_match('/\.$/',$link)) {
         $link = substr($link,0,-1);
       }
+#      print "LINK: ".htmlspecialchars($link)."<br/>";
   
       $linkid = 0;
       if (preg_match('/^http|ftp/',$link) && $link != 'http://www.phplist.com') {# && !strpos($link,$clicktrack_root)) {
@@ -653,6 +653,8 @@ if (0) {
         if (ENABLE_RSS && sizeof($rssitems))
           updateRSSStats($rssitems,"ashtml");
       #  dbg("Adding HTML ".$cached[$messageid]["templateid"]);
+      ## wrap it: http://mantis.phplist.com/view.php?id=15528
+        $htmlmessage = wordwrap($htmlmessage, 60, "\r\n");
         $mail->add_html($htmlmessage,$textmessage,$cached[$messageid]["templateid"]);
         addAttachments($messageid,$mail,"HTML");
       } else {

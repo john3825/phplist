@@ -303,9 +303,17 @@ if (isset($_GET["doit"]) && $_GET["doit"] == 'yes') {
         Sql_Create_Table($tables["bounceregex"],$DBstruct["bounceregex"]);
         Sql_Create_Table($tables["bounceregex_bounce"],$DBstruct["bounceregex_bounce"]);
       }
+      if ($minor < 10 || ($minor == 10 && $sub < 13)) {
+        Sql_Create_Table($tables["admintoken"],$DBstruct["admintoken"]);
+      }
       break;
   }
-  
+
+  ## make sure the token table exists
+  if (!Sql_Table_exists($tables["admintoken"],1)) {
+    Sql_Create_Table($tables["admintoken"],$DBstruct["admintoken"]);
+  }
+
   ## add index on bounces, but ignore the error
   Sql_Query("create index statusindex on {$tables["user_attribute"]} (status(10))",1);  
   Sql_Query("create index message_lookup using btree on {$tables["user_message_bounce"]} (message)",1);   

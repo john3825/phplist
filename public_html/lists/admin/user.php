@@ -66,8 +66,6 @@ if (isset($_GET['list']))
   echo "<br />".PageLink2("members","Back to Members of this list","id=".sprintf('%d',$_GET['list']))."\n";
 if (isset($start))
   echo "<br />".PageLink2("users","Back to the list of users","start=$start&unconfirmed=".isset($_GET["unconfirmed"])?'1':'0')."\n";
-if ($find)
-  echo "<br />".PageLink2("users","Back to the search results","start=$start&find=".urlencode($find)."&findby=".urlencode($findby)."&unconfirmed=".$_GET["unconfirmed"]."\n");
 $more = '';
 
 if (!empty($_REQUEST['returnpage'])) {
