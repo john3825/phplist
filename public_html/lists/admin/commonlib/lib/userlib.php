@@ -67,6 +67,9 @@ function deleteUser($id) {
   Sql_Query(sprintf('delete from %s where user = %d',$tables["user_message_bounce"],$id));
   Sql_Query(sprintf('delete from %s where id = %d',$tables["user"],$id));
   Sql_Query(sprintf('delete from %s where userid = %d',$tables["user_history"],$id));
+	if (Sql_table_exists('user_group')) {
+		Sql_Query(sprintf('delete from user_group where userid = %d',$id));
+	}
   ### allow plugins to delete their data
 
   if (is_array($GLOBALS['plugins'])) {
@@ -110,7 +113,12 @@ function addNewUser($email,$password = "") {
     passwordchanged = now(),disabled = 0,
     uniqid = "%s",htmlemail = 1
     ',$GLOBALS['tables']['user'],$email,$password,getUniqid()));
-  $id = Sql_Insert_Id();
+  $ar = Sql_Affected_Rows();
+  if ($ar > 0) {
+    $id = Sql_Insert_Id();
+  } else {
+    $id = 0;
+  }
   return $id;
 }
 
@@ -118,7 +126,7 @@ function getAttributeIDbyName ($sName) {
   # Looks for an attribute named sName.
   # Returns table ID or 0 if not found.
   # Can also be used as 'isAttribute'
-
+  
   if(empty($sName)) return 0;
   global $usertable_prefix;
   # workaround for integration webbler/phplist
@@ -132,42 +140,10 @@ function getAttributeIDbyName ($sName) {
     $att_table = "attribute";
     $user_att_table = "user_attribute";
   }
-
   $res = Sql_Query(sprintf('SELECT id FROM %s%s WHERE name = "%s"',
     $usertable_prefix,$att_table,$sName));
   $row = Sql_Fetch_row($res);
-
-//  dbg($row,'$$row');
-  return $row[0];
-}
-
-/**
- * Returns attribute name for ID
- * 
- * @param $iAttribute
- * @return unknown_type
- */
-function getAttributeNamebyID ($iAttribute) {
-
-  if ( empty($iAttribute) ) return null;
-  global $usertable_prefix;
-  # workaround for integration webbler/phplist
-  if (!isset($usertable_prefix)) {
-    $usertable_prefix = '';
-  }
-  if ($tables["attribute"]) {
-    $att_table = $tables["attribute"];
-    $user_att_table = $tables["user_attribute"];
-  } else {
-    $att_table = "attribute";
-    $user_att_table = "user_attribute";
-  }
-
-  $res = Sql_Query(sprintf('SELECT name FROM %s%s WHERE id = %d',
-    $usertable_prefix,$att_table,$iAttribute));
-  $row = Sql_Fetch_row($res);
-
-//  dbg($row,'$$row');
+    
   return $row[0];
 }
 
@@ -262,7 +238,7 @@ function UserAttributeValue($user = 0,$attribute = 0) {
   global $table_prefix,$tables;
   if (!isset($table_prefix))
     $table_prefix = "phplist_";
-#  if (!$user || !$attribute) return;
+  if (!$user || !$attribute) return;
 
   if (isset($tables["attribute"])) {
     $att_table = $tables["attribute"];
@@ -282,7 +258,7 @@ function UserAttributeValue($user = 0,$attribute = 0) {
           $val_ids[0] = cleanCommaList($val_ids[0]);
         }
         ## make sure the val_ids as numbers
-        $values = split(',',$val_ids[0]);
+        $values = explode(',',$val_ids[0]);
         $ids = array();
         foreach ($values as $valueIndex) {
           $iValue = sprintf('%d',$valueIndex);
@@ -393,6 +369,15 @@ function addEmailToBlackList($email,$reason = '') {
         $item,addslashes($_SERVER[$item])));
     }
   }
+  ## call plugins to tell them
+  if (isset($GLOBALS['plugins']) && is_array($GLOBALS['plugins'])) {
+    foreach ($GLOBALS['plugins'] as $pluginname => $plugin) {
+      if (method_exists($plugin, "blacklistEmail")) {
+         $plugin->blacklistEmail($email);
+      }
+    }
+  }
+  
 }
 
 function UserAttributeValueSelect($user = 0,$attribute = 0) {
@@ -443,7 +428,7 @@ function UserAttributeValueCbGroup($user = 0,$attribute = 0) {
 
   $att = Sql_Fetch_array_Query("select * from $att_table where id = $attribute");
   $values_req = Sql_Fetch_Row_Query("select value from $user_att_table where userid = $user and attributeid = $attribute");
-  $values = split(",",$values_req[0]);
+  $values = explode(",",$values_req[0]);
   $html = sprintf('<input type="hidden" name="cbgroup[]" value="%d" /><table>',$attribute);
  # $html = sprintf('<select name="attribute[%d]" style="attributeinput" >',$attribute);
   $res = Sql_Query("select id,name from $table_prefix"."listattr_".$att["tablename"]." order by listorder,name");
@@ -531,12 +516,12 @@ function is_email($email) {
 		  #'
 
 			$pattern =
-			"^[\&\'-_.[:alnum:]]+@((([[:alnum:]]|[[:alnum:]][[:alnum:]-]*[[:alnum:]])\.)+(ac|ad|ae|aero|af|ag|ai|al|am|an|ao|aq|ar|arpa|as|asia|at|au|aw|az|ba|bb|bd|be|bf|bg|bh|bi|biz|bj|bm|bn|bo|br|bs|bt|bv|bw|by|bz|ca|cat|cc|cd|cf|cg|ch|ci|ck|cl|cm|cn|co|com|coop|cr|cs|cu|cv|cx|cy|cz|de|dev|dj|dk|dm|do|dz|ec|edu|ee|eg|eh|er|es|et|eu|fi|fj|fk|fm|fo|fr|ga|gb|gd|ge|gf|gg|gh|gi|gl|gm|gn|gov|gp|gq|gr|gs|gt|gu|gw|gy|hk|hm|hn|home|hr|ht|hu|id|ie|il|im|in|info|int|io|iq|ir|is|it|jm|je|jo|jp|ke|kg|kh|ki|km|kn|kp|kr|kw|ky|kz|la|lb|lc|li|lk|lr|loc|ls|lt|lu|lv|ly|ma|mc|md|mg|mh|mil|mk|ml|mm|mn|mo|mp|mq|mr|ms|mt|mu|museum|mv|mw|mx|my|mz|na|name|nc|ne|net|nf|ng|ni|nl|no|np|nr|nt|nu|nz|om|org|pa|pe|pf|pg|ph|pk|pl|pm|pn|pr|pro|ps|pt|pw|py|qa|quipu|re|ro|ru|rw|sa|sb|sc|sd|se|sg|sh|si|sj|sk|sl|sm|sn|so|sr|st|su|sv|sy|sz|tc|td|tel|tf|tg|th|tj|tk|tm|tn|to|tp|tr|travel|tt|tv|tw|tz|ua|ug|uk|um|us|uy|uz|va|vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|yu|za|zm|zw)|(([0-9][0-9]?|[0-1][0-9][0-9]|[2][0-4][0-9]|[2][5][0-5])\.){3}([0-9][0-9]?|[0-1][0-9][0-9]|[2][0-4][0-9]|[2][5][0-5]))$";
+			"/^[\&\'-_.[:alnum:]]+@((([[:alnum:]]|[[:alnum:]][[:alnum:]-]*[[:alnum:]])\.)+(ac|ad|ae|aero|af|ag|ai|al|am|an|ao|aq|ar|arpa|as|asia|at|au|aw|az|ba|bb|bd|be|bf|bg|bh|bi|biz|bj|bm|bn|bo|br|bs|bt|bv|bw|by|bz|ca|cat|cc|cd|cf|cg|ch|ci|ck|cl|cm|cn|co|com|coop|cr|cs|cu|cv|cx|cy|cz|de|dev|dj|dk|dm|do|dz|ec|edu|ee|eg|eh|er|es|et|eu|fi|fj|fk|fm|fo|fr|ga|gb|gd|ge|gf|gg|gh|gi|gl|gm|gn|gov|gp|gq|gr|gs|gt|gu|gw|gy|hk|hm|hn|home|hr|ht|hu|id|ie|il|im|in|info|int|io|iq|ir|is|it|jm|je|jo|jp|ke|kg|kh|ki|km|kn|kp|kr|kw|ky|kz|la|lb|lc|li|lk|lr|loc|ls|lt|lu|lv|ly|ma|mc|md|mg|mh|mil|mk|ml|mm|mn|mo|mp|mq|mr|ms|mt|mu|museum|mv|mw|mx|my|mz|na|name|nc|ne|net|nf|ng|ni|nl|no|np|nr|nt|nu|nz|om|org|pa|pe|pf|pg|ph|pk|pl|pm|pn|pr|pro|ps|pt|pw|py|qa|quipu|re|ro|ru|rw|sa|sb|sc|sd|se|sg|sh|si|sj|sk|sl|sm|sn|so|sr|st|su|sv|sy|sz|tc|td|tel|tf|tg|th|tj|tk|tm|tn|to|tp|tr|travel|tt|tv|tw|tz|ua|ug|uk|um|us|uy|uz|va|vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|yu|za|zm|zw)|(([0-9][0-9]?|[0-1][0-9][0-9]|[2][0-4][0-9]|[2][5][0-5])\.){3}([0-9][0-9]?|[0-1][0-9][0-9]|[2][0-4][0-9]|[2][5][0-5]))$/i";
 
-			  if(eregi($pattern, $email)) {
+			  if(preg_match($pattern, $email)) {
 			    return 1;
 			  } else {
-			    return(0);
+			    return 0;
 			  }
       break;
   }
@@ -595,8 +580,8 @@ function validateEmail($email) {
   if (!isset($GLOBALS["check_for_host"])) {
     $GLOBALS["check_for_host"] = 0;
   }
-  if (isset($email) && $GLOBALS["check_for_host"]) {
-    list($username,$domaincheck) = split('@',$email);
+  if (!empty($email) && $GLOBALS["check_for_host"]) {
+    list($username,$domaincheck) = explode('@',$email);
     # checking for an MX is not sufficient
 #    $mxhosts = array();
 #    $validhost = getmxrr ($domaincheck,$mxhosts);
@@ -665,7 +650,7 @@ function validateCC($ccno) {
   else
     # if it is not any of the above, we do not know how to validate it
 
-  # reject 4 and 15 1s anyway apart when request is from tincan offices
+  # reject 4 and 15 1s anyway 
   if ($ccno == "4111111111111111") {
     return 0;
   }
@@ -795,7 +780,8 @@ function loadUser($loginname = "") {
         "name" => $att["name"],
         "value" => $att["value"],
         "type" => $att["type"],
-        "attid" => $att["id"]
+        "attid" => $att["id"],
+        "displayvalue" => $att['value'],
         );
       switch ($att["type"]) {
         case "textline":
@@ -810,6 +796,10 @@ function loadUser($loginname = "") {
         case "select":
           $_SESSION["userdata"]["attribute".$att["id"]]["displayvalue"] =
             AttributeValue($att["tablename"],$att["value"]);
+          break;
+        case "date":
+          $_SESSION["userdata"]["attribute".$att["id"]]["displayvalue"] =
+            formatDate($att["value"]);
           break;
       }
 #    }
@@ -883,10 +873,13 @@ function isGuestAccount() {
 }
 
 function saveUserAttribute($userid,$attid,$data) {
-  global $usertable_prefix, $tables;
+  global $usertable_prefix, $table_prefix, $tables;
   # workaround for integration webbler/phplist
   if (!isset($usertable_prefix)) {
     $usertable_prefix = '';
+  }
+  if (!isset($table_prefix)) {
+    $table_prefix = 'phplist_';
   }
   if (!empty($tables["attribute"])) {
     $att_table = $usertable_prefix .$tables["attribute"];
@@ -917,15 +910,12 @@ function saveUserAttribute($userid,$attid,$data) {
     $data["type"] = "textline";
 
   if ($data["type"] == "static" || $data["type"] == "password" || $data['type'] == 'htmlpref') {
-    if (!empty($GLOBALS['config']['dontsave_userpassword']) && $data['type'] == 'password') {
-      $data["value"] = 'not authoritative';
-    }
     Sql_Query(sprintf('update user set %s = "%s" where id = %d',
       $attid,$data["value"],$userid));
       dbg('Saving','',DBG_TRACE);
     if ($data["type"] == "password") {
-      Sql_Query(sprintf('update user set passwordchanged = now() where id = %d',
-      $userid));
+      Sql_Query(sprintf('update user set passwordchanged = now(),password="%s" where id = %d',
+      hash('sha256',$data['value']),$userid));
     }
     return 1;
   }
@@ -981,10 +971,10 @@ function saveUserAttribute($userid,$attid,$data) {
         $attid,$data["value"],$userid));
       break;
     case "select":
-      $curval = Sql_Fetch_Row_Query(sprintf('select id from '.$usertable_prefix . 'listattr_%s
+      $curval = Sql_Fetch_Row_Query(sprintf('select id from '.$table_prefix . 'listattr_%s
         where name = "%s"',$atttable,$data["displayvalue"]),1);
       if (!$curval[0] && $data['displayvalue'] && $data['displayvalue'] != '') {
-        Sql_Query(sprintf('insert into '.$usertable_prefix . 'listattr_%s (name) values("%s")',$atttable,
+        Sql_Query(sprintf('insert into '.$table_prefix . 'listattr_%s (name) values("%s")',$atttable,
           $data["displayvalue"]));
         sendError("Added ".$data["displayvalue"]." to $atttable");
         $valid = Sql_Insert_id();
@@ -995,31 +985,6 @@ function saveUserAttribute($userid,$attid,$data) {
         values(%d,%d,"%s")', $user_att_table, $userid,$attid,$valid));
 
       break;
-    case 'avatar':
-      if (is_array($_FILES)) { ## only avatars are files, for now
-        if (!defined('MAX_AVATAR_SIZE')) {
-          define('MAX_AVATAR_SIZE',100000);
-        }
-      
-        $formfield = 'attribute'.$attid.'_file'; ## the name of the fileupload element
-        if (!empty($_FILES[$formfield]['name'])) {
-          $tmpnam = $_FILES[$formfield]['tmp_name'];
-          move_uploaded_file($tmpnam,'/tmp/avatar'.$userid.'.jpg');
-
-          if (function_exists('resizeImageFile')) {
-            resizeImageFile('/tmp/avatar'.$userid.'.jpg',250,1);
-          }
-          $size = filesize('/tmp/avatar'.$userid.'.jpg');
-#          dbg('New size: '.$size);
-          if ($size < MAX_AVATAR_SIZE) {
-            $avatar = file_get_contents('/tmp/avatar'.$userid.'.jpg');
-            Sql_Query(sprintf('replace into %s (userid,attributeid,value)
-              values(%d,%d,"%s")',$user_att_table,$userid,$attid,base64_encode($avatar)));
-            unlink('/tmp/avatar'.$userid.'.jpg');
-          }
-        } 
-      }
-      break;
     default:
       Sql_Query(sprintf('replace into %s (userid,attributeid,value)
         values(%d,%d,"%s")', $user_att_table, $userid,$attid,$data["value"]));
@@ -1029,7 +994,6 @@ function saveUserAttribute($userid,$attid,$data) {
 }
 
 function saveUserByID($userid,$data) {
-  dbg("Saving user by id $userid");
   while (list($key,$val) = each($data)) {
     if (preg_match("/^attribute(\d+)/",$key,$regs)) {
       $attid = $regs[1];
@@ -1043,7 +1007,6 @@ function saveUserByID($userid,$data) {
 }
 
 function saveUser($loginname,$data) {
-  dbg("Saving user $loginname");
   # saves user to database
   $id_req = Sql_Fetch_Row_Query("select id from user where email = \"$loginname\"");
   if ($id_req[0]) {
@@ -1085,6 +1048,7 @@ function saveUserData($username,$fields) {
 #  dbg("Checking fields");
   foreach ($fields as $fname => $fielddetails) {
     dbg('Saving user Saving '.$fname.' to session '.$_POST[$fname]);
+ #   dbg($fielddetails);
     $key = $fname;
     $val = $_POST[$fname];
     if (!ereg("required",$key) && $key != "unrequire" &&
@@ -1097,7 +1061,11 @@ function saveUserData($username,$fields) {
          $_SESSION["userdata"][$key] = array();
        $_SESSION["userdata"][$key]["name"] = $fields[$key]["name"];
        $_SESSION["userdata"][$key]["type"] = $fields[$key]["type"];
-       if ($fields[$key]["type"] == "creditcardno") {
+       if ($fields[$key]["type"] == "date") {
+         $_SESSION["userdata"][$key]["value"] = sprintf('%04d-%02d-%02d',
+          $_POST['year'][$key],$_POST['month'][$key],$_POST['day'][$key]);
+         $_SESSION["userdata"][$key]["displayvalue"] = $_SESSION["userdata"][$key]["value"];
+       } elseif ($fields[$key]["type"] == "creditcardno") {
          # dont overwrite known CC with ***
          if (!preg_match("#^\*+#",$val)) {
            $_SESSION["userdata"][$key]["value"] = ltrim($val);
@@ -1110,7 +1078,9 @@ function saveUserData($username,$fields) {
            $_SESSION["userdata"][$key]["displayvalue"] = $fields[$key]["values"][$val];
          }
        } elseif ($fields[$key]["type"] == "checkboxgroup") {
-         $_SESSION["userdata"][$key]["value"] = join(",",$val);
+         if (is_array($val)) { // if val is empty join crashes
+           $_SESSION["userdata"][$key]["value"] = join(",",$val);
+         }
        } elseif ($fields[$key]["type"] == "creditcardno") {
           # erase any non digits from the CC numbers
           $_SESSION["userdata"][$key]["value"] = preg_replace("/\D/","",$_SESSION["userdata"][$key]["value"]);
