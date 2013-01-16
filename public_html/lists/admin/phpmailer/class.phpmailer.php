@@ -33,7 +33,7 @@ class PHPMailer
      * Sets the CharSet of the message.
      * @var string
      */
-    var $CharSet           = "iso-8859-1";
+    var $CharSet           = "iso-2022-jp";
 
     /**
      * Sets the Content-type of the message.
@@ -46,7 +46,7 @@ class PHPMailer
      * "7bit", "binary", "base64", and "quoted-printable".
      * @var string
      */
-    var $Encoding          = "8bit";
+    var $Encoding          = "7bit";
 
     /**
      * Holds the most recent mailer error message.
@@ -397,6 +397,8 @@ class PHPMailer
      * @return bool
      */
     function SendmailSend($header, $body) {
+        $body = mb_convert_encoding($body, $this->CharSet);
+
         if ($this->Sender != "")
             $sendmail = sprintf("%s -oi -f %s -t", $this->Sendmail, $this->Sender);
         else
@@ -427,6 +429,8 @@ class PHPMailer
      * @return bool
      */
     function MailSend($header, $body) {
+        $body = mb_convert_encoding($body, $this->CharSet);
+
         $to = "";
         for($i = 0; $i < count($this->to); $i++)
         {
@@ -465,6 +469,8 @@ class PHPMailer
      * @return bool
      */
     function SmtpSend($header, $body) {
+        $body = mb_convert_encoding($body, $this->CharSet);
+
         include_once($this->PluginDir . "class.smtp.php");
         $error = "";
         $bad_rcpt = array();
@@ -923,6 +929,7 @@ class PHPMailer
         if($this->IsError())
             $result = "";
 
+//        $result = mb_convert_encoding($result, $this->CharSet);
         return $result;
     }
 
@@ -1147,6 +1154,8 @@ class PHPMailer
      * @return string
      */
     function EncodeHeader ($str, $position = 'text') {
+      $str = mb_encode_mimeheader($str, $this->CharSet, "B");
+
       $x = 0;
 
       switch (strtolower($position)) {
