@@ -19,7 +19,7 @@ $lan = array(
 'Illegal character was %s' => '不正な文字は%sでした。',
 'A character has been found in the import which is not the delimiter indicated, but is likely to be confused for one. Please clean up your import file and try again' => '区切り文字指定されていない文字がインポートの中にみつかり、混乱を招きそうです。あなたのインポートファイルを整理して、再度トライしてください。',
 'ok, %d lines' => 'ok, %d 行',
-'Cannot find column with email, please make sure the column is called &quot;email&quot; and not eg e-mail' => '電子メールアドレスが含まれるカラムを見つけることができません、確実にカラムには&quot;email&quot;とつけてください。すなわち、e-mailではありません。',
+'Cannot find column with email, please make sure the column is called &quot;email&quot; and not eg e-mail' => 'メールアドレスが含まれるカラムを見つけることができません、確実にカラムには&quot;email&quot;とつけてください。すなわち、e-mailではありません。',
 'Create new one' => '新規作成',
 'Skip Column' => 'このカラムをスキップ',
 'Import Attributes' => '属性のインポート',
@@ -82,11 +82,11 @@ $lan = array(
 'assigninvalid_blurb' => '"Invalid 割り当て"は、Invalid Emailをもつユーザに電子メールを作成することに使用されます。
 電子メールに値を作成するために、 [ と ] の間の値を使うことができます。例えば、もしあなたのインポートファイルにカラム"First Name"とカラム"Last Name"が含まれていると、ファーストネームとラストネームを含んでいるこのユーザに、電子メールの新規の値を使うために"[first name] [last name]"を利用することができます。
 値[number]はインポートのための連番を挿入する時に使われます。',
-'overwriteexisting_blurb' => 'もしあなたが"既存を上書き"をチェックするのでしたら、データベース内のユーザの情報はインポートされた情報で置換されます。ユーザは電子メールアドレスまたは外部キーによりマッチされます。',
-'retainold_blurb' => 'もし"古いユーザ電子メールを保持"をチェックするのでしたら、同一である二つの電子メールアドレスのコンフリクトは、古い電子メールアドレスをそのまま維持し、新しい電子メールアドレスに"duplicate"を追加します。もしチェックしないから、古い電子メールアドレスは"duplicate"となり、新しい電子メールアドレスが優先されるでしょう。',
+'overwriteexisting_blurb' => 'もしあなたが"既存を上書き"をチェックするのでしたら、データベース内のユーザの情報はインポートされた情報で置換されます。ユーザはメールアドレスまたは外部キーによりマッチされます。',
+'retainold_blurb' => 'もし"古いユーザ電子メールを保持"をチェックするのでしたら、同一である二つのメールアドレスのコンフリクトは、古いメールアドレスをそのまま維持し、新しいメールアドレスに"duplicate"を追加します。もしチェックしないから、古いメールアドレスは"duplicate"となり、新しいメールアドレスが優先されるでしょう。',
 'sendnotification_blurb' => 'もし"通知メールを送信する"をチェックするのでしたら、あなたが追加しているユーザは、購読の確定要求を送信され、ユーザは応答しなければいけません。この機能はInvalid Emailを同定しますので、おすすめです。',
 'phplist Import  Results' => 'PHPlistインポート結果',
-'File containing emails' => '電子メールアドレスが含まれているファイル',
+'File containing emails' => 'メールアドレスが含まれているファイル',
 'Field Delimiter' => 'フィールドの区切り文字',
 '(default is TAB)' => '（デフォルトはTAB）',
 'Record Delimiter' => 'レコードの区切り文字',
