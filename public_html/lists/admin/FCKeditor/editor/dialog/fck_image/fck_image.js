@@ -421,6 +421,9 @@ function OpenServerBrowser( type, url, width, height )
 }
 
 var sActualBrowser ;
+// fix for full URL on uploaded images
+// http://www.flashme.com.au/flashmeblog/web-design-issues/phplist-uploading-images-fckeditor-and-absolute-path-urls/
+var theDomain = 'http://' + location.hostname; 
 
 function SetUrl( url, width, height, alt )
 {
@@ -431,7 +434,7 @@ function SetUrl( url, width, height, alt )
 	}
 	else
 	{
-		GetE('txtUrl').value = url ;
+		GetE('txtUrl').value = theDomain + url ;
 		GetE('txtWidth').value = width ? width : '' ;
 		GetE('txtHeight').value = height ? height : '' ;
 
