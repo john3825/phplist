@@ -6,6 +6,7 @@ if (TEST)
 
 if (isset($_GET['page']) && $_GET["page"]) {
   $page = $_GET["page"];
+  $page = preg_replace('/\W/','',$page);
   if (!is_file($page.".php") || $page == "logout") {
     $page = "home";
   }
