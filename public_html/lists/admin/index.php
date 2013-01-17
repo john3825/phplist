@@ -261,7 +261,7 @@ if ($GLOBALS["require_login"] && $page != "login") {
 }
 if (LANGUAGE_SWITCH) {
   $ls = '<div align="right" id="languageswitch"><br/><form name="languageswitch" method="post" style="margin: 0; padding: 0">';
-  $ls .= '<select name="setlanguage" onChange="document.languageswitch.submit()" style="width: 100px; font-size: 10px; color: #666666">';
+  $ls .= '<select name="setlanguage" onChange="document.languageswitch.submit()" style="width: 100px;>';
   $lancount = 0;
   foreach ($GLOBALS['LANGUAGES'] as $iso => $rec) {
     if (is_dir(dirname(__FILE__).'/lan/'.$iso)) {

@@ -17,11 +17,10 @@
   <TR vAlign=top>
     <TD colSpan=2 rowspan="2" height="63" background="images/topstrip.png"><a href="http://www.phplist.com" target="_blank"><img src="images/masthead.png" border=0 width=577 height=75 alt=""></a></TD>
     <TD align=left
-      background="images/topstrip.png" bgcolor="#F0D1A3"><FONT
-      size=-2>&nbsp;<I>powered by: </I><BR>&nbsp;<B>[<A class=powered
-      href="http://www.php.net/" target=_new><I>PHP</I></A>]</B> + <B>[<A
+      background="images/topstrip.png" bgcolor="#F0D1A3">&nbsp;powered by: <BR>&nbsp;<A class=powered
+      href="http://www.php.net/" target=_new>PHP</A> + <A
       class=powered href="http://www.mysql.com/"
-      target=_new>mySQL</A>]</B></FONT></TD></TR>
+      target=_new>MySQL</A></TD></TR>
   <TR vAlign=bottom>
     <TD vAlign=bottom width=132
     background="images/topright.png" bgcolor="#F0D1A3"><SPAN
