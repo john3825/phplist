@@ -3,14 +3,14 @@
   border-color: #e7be8f;
 }
 .shaderfooter {
-  font-size : 11px;
+  
   background-color : #e7be8f;
   font-weight: bold;
   text-align : left;
   text-decoration : none;
 }
 .shaderheader {
-  font-size : 11px; 
+   
   color : black;
   background-color : #e7be8f;
   font-weight: bold; 
@@ -25,7 +25,7 @@
   padding-left : 3px;
 }
 .shaderfootertexthidden {
-  font-size : 11px;
+  
   color : black;
   background-color : #e7be8f;
   font-weight: bold;
@@ -38,7 +38,7 @@
 }
 
 .shaderfootertextvisible {
-  font-size : 11px;
+  
   color : black;
   background-color : #e7be8f;
   font-weight: bold;
@@ -68,12 +68,12 @@
 }
 .shadersmall {
   font-family:"MS Sans Serif",Geneva,sans-serif;
-  font-size:10px;
+  
   text-decoration:none;
 }
 
 .shadersmallnavtext {
   font-family:"MS Sans Serif",Geneva,sans-serif;
-  font-size:10px;
+  
   text-decoration:none;
 }

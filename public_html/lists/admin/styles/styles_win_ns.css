@@ -1,13 +1,13 @@
 BODY,UL,OL,LI {
-	font-size: small;
-	font-family : Verdana, Arial, Helvetica, sans-serif;
+	
+	
 	color : black;
 	background-color : white;
 }
 
 TD  {
-	font-size : x-small;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : normal;
 	font-style : normal;
 	color : black;
@@ -15,7 +15,7 @@ TD  {
 }
 
 H1  {
-	font-family : Arial, Helvetica, sans-serif;
+	
 	font-size : 18px;
 	font-style : normal;
 	font-weight : normal;
@@ -24,7 +24,7 @@ H1  {
 
 H2  {
 	font-size : 14px;
-	font-family : Arial, Helvetica, sans-serif;
+	
 	font-weight : bold;
 	font-style : normal;
 	color : black;
@@ -33,7 +33,7 @@ H2  {
 
 H3  {
 	font-size : 14px;
-	font-family : Arial, Helvetica, sans-serif;
+	
 	font-weight : bold;
 	font-style : normal;
 	color : black;
@@ -41,8 +41,8 @@ H3  {
 }
 
 A  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : bold;
 	font-style : normal;
 	color : green;
@@ -50,8 +50,8 @@ A  {
 }
 
 A:Visited,A:Active   {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : bold;
 	font-style : normal;
 	color : green;
@@ -59,8 +59,8 @@ A:Visited,A:Active   {
 }
 
 A:Hover  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : bold;
 	font-style : normal;
 	color : orange;
@@ -69,7 +69,7 @@ A:Hover  {
 
 .menuhead  {
 	font-size : 13px;
-	font-family : Arial, Helvetica, sans-serif;
+	
 	font-weight : bold;
 	font-style : normal;
 	color : Red;
@@ -79,8 +79,8 @@ A:Hover  {
 }
 
 .menuitem  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : bold;
 	font-style : normal;
 	color : black;
@@ -91,8 +91,8 @@ A:Hover  {
 }
 
 .sectionlink  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : bold;
 	font-style : normal;
 	color : black;
@@ -100,8 +100,8 @@ A:Hover  {
 }
 
 .email  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : bold;
 	font-style : normal;
 	color : blue;
@@ -109,8 +109,8 @@ A:Hover  {
 }
 
 .address  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : normal;
 	font-style : normal;
 	color : black;
@@ -118,16 +118,16 @@ A:Hover  {
 }
 
 .url  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : bold;
 	font-style : normal;
 	color : black;
 	text-decoration : none;
 }
 .listitem  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : normal;
 	font-style : normal;
 	color : black;
@@ -135,8 +135,8 @@ A:Hover  {
 }
 
 .error  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : normal;
 	font-style : normal;
 	color : red;
@@ -144,8 +144,8 @@ A:Hover  {
 }
 
 .info  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : normal;
 	font-style : normal;
 	color : magenta;
@@ -153,8 +153,8 @@ A:Hover  {
 }
 
 .botbar  {
-	font-size : 11px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : bold;
 	font-style : normal;
 	color : white;
@@ -162,8 +162,8 @@ A:Hover  {
 }
 
 .botbartd  {
-	font-size : 11px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : bold;
 	font-style : normal;
 	color : white;

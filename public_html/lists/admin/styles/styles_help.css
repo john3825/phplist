@@ -1,6 +1,6 @@
 BODY  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : normal;
 	font-style : normal;
 	color : black;
@@ -10,8 +10,8 @@ BODY  {
 }
 
 P  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : normal;
 	font-style : normal;
 	color : black;
@@ -20,7 +20,7 @@ P  {
 }
 
 H1  {
-	font-family : Arial, Helvetica, sans-serif;
+	
 	font-size : 18px;
 	font-style : normal;
 	font-weight : normal;
@@ -30,7 +30,7 @@ H1  {
 
 H2  {
 	font-size : 14px;
-	font-family : Arial, Helvetica, sans-serif;
+	
 	font-weight : bold;
 	font-style : normal;
 	color : black;
@@ -39,7 +39,7 @@ H2  {
 
 H3  {
 	font-size : 14px;
-	font-family : Arial, Helvetica, sans-serif;
+	
 	font-weight : bold;
 	font-style : normal;
 	color : black;
@@ -47,8 +47,8 @@ H3  {
 }
 
 TD  {
-	font-size : 10px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : normal;
 	font-style : normal;
 	color : black;
@@ -56,20 +56,20 @@ TD  {
 }
 
 a:link {
-	font-size: 11px; color: #ff6600; font-style: bold; font-family: verdana, sans-serif; text-decoration: none;
+	 color: #ff6600; font-style: bold;  text-decoration: none;
 }
 a:active {
-	font-size: 11px; color: #ff6600; font-style: bold; font-family: verdana, sans-serif; text-decoration: none;
+	 color: #ff6600; font-style: bold;  text-decoration: none;
 }
 a:visited {
-	font-size: 11px; color: #ff6600; font-style: bold; font-family: verdana, sans-serif; text-decoration: none;
+	 color: #ff6600; font-style: bold;  text-decoration: none;
 }
-a:hover {font-size: 11px; color: #ff6600; font-style: bold; font-family: verdana, sans-serif;
+a:hover { color: #ff6600; font-style: bold; 
 	text-decoration: underline;
 }
 .menuhead  {
 	font-size : 13px;
-	font-family : Arial, Helvetica, sans-serif;
+	
 	font-weight : bold;
 	font-style : normal;
 	color : Red;
@@ -79,16 +79,16 @@ a:hover {font-size: 11px; color: #ff6600; font-style: bold; font-family: verdana
 }
 
 .attributeinput  {
-	font-size : 10px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : normal;
 	font-style : normal;
 	color : black;
 	text-decoration : none;
 }
 .menuitem  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : bold;
 	font-style : normal;
 	color : black;
@@ -98,8 +98,8 @@ a:hover {font-size: 11px; color: #ff6600; font-style: bold; font-family: verdana
 }
 
 .sectionlink  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : bold;
 	font-style : normal;
 	color : black;
@@ -107,8 +107,8 @@ a:hover {font-size: 11px; color: #ff6600; font-style: bold; font-family: verdana
 }
 
 .email  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : bold;
 	font-style : normal;
 	color : blue;
@@ -116,8 +116,8 @@ a:hover {font-size: 11px; color: #ff6600; font-style: bold; font-family: verdana
 }
 
 .address  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : normal;
 	font-style : normal;
 	color : black;
@@ -125,8 +125,8 @@ a:hover {font-size: 11px; color: #ff6600; font-style: bold; font-family: verdana
 }
 
 .url  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : bold;
 	font-style : normal;
 	color : black;
@@ -134,8 +134,8 @@ a:hover {font-size: 11px; color: #ff6600; font-style: bold; font-family: verdana
 }
 
 .listitem  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : normal;
 	font-style : normal;
 	color : black;
@@ -143,8 +143,8 @@ a:hover {font-size: 11px; color: #ff6600; font-style: bold; font-family: verdana
 }
 
 .error  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : normal;
 	font-style : normal;
 	color : red;
@@ -152,8 +152,8 @@ a:hover {font-size: 11px; color: #ff6600; font-style: bold; font-family: verdana
 }
 
 .info  {
-	font-size : 12px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : normal;
 	font-style : normal;
 	color : magenta;
@@ -161,8 +161,8 @@ a:hover {font-size: 11px; color: #ff6600; font-style: bold; font-family: verdana
 }
 
 .botbar  {
-	font-size : 11px;
-	font-family : Arial, Helvetica, sans-serif;
+	
+	
 	font-weight : bold;
 	font-style : normal;
 	color : white;

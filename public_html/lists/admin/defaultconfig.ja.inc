@@ -31,8 +31,8 @@ $defaultheader = '
 <td height="41" background="images/top01.png" colspan="2">
 <span class="phphead"><a href="http://www.phplist.com" class="phphead"><b>PHP</b>list</a></span></td>
 <td background="images/top02.png" align="left">
-<font size="-2">&nbsp;<i>powered by:
-</i><br />&nbsp;<b>[<a class="powered" href="http://www.php.net/" target="_new"><i>PHP</i></a>]</b> + <b>[<a class="powered" href="http://www.mysql.com/" target="_new">mySQL</a>]</b></font></td>
+&nbsp;<i>powered by:
+</i><br />&nbsp;<b>[<a class="powered" href="http://www.php.net/" target="_new"><i>PHP</i></a>]</b> + <b>[<a class="powered" href="http://www.mysql.com/" target="_new">mySQL</a>]</b></td>
 </tr>
 
 <tr valign="bottom">
