@@ -232,7 +232,7 @@ if ($id) {
   $id = 0;
   print '<h1>'.$GLOBALS['I18N']->get('Add a new User').'</h1>';
 }
-  print "<p><h3>".$GLOBALS['I18N']->get('User Details')."</h3>".formStart()."<table border=1>";
+  print "<p><h3>".$GLOBALS['I18N']->get('User Details')."</h3>".formStart().'<table class="grid">';
   print "<input type=hidden name=list value=$list><input type=hidden name=id value=$id>";
   print "<input type=hidden name=returnpage value=$returnpage><input type=hidden name=returnoption value=$returnoption>";
 
@@ -290,7 +290,7 @@ if ($id) {
   }
 
   print "<h3>".$GLOBALS['I18N']->get('Mailinglist Membership').":</h3>";
-  print "<table border=1><tr>";
+  print '<table class="grid"><tr>';
   $req = Sql_Query("select * from {$tables["list"]} $subselect_where order by listorder,name");
   $c = 0;
   while ($row = Sql_Fetch_Array($req)) {

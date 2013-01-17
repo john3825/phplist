@@ -227,3 +227,6 @@ a:link.listingname,
 a:active.listingname,
 a:visited.listingname  {font-family: verdana, sans-serif;font-size : 11px; color : #999966;background-color : #ffffff; font-weight: bold; text-align : middle; text-decoration : none; display:block;}
 a:hover.listingname {color: #666633;}
+
+table.grid {border-collapse:collapse;}
+table.grid td {border:1px solid #ccc; padding:8px;}

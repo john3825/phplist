@@ -107,18 +107,18 @@ class WebblerListing {
       $tophelp = $this->help;
     }
     $html = '<tr valign="top">';
-    $html .= sprintf('<td><a name="%s"></a><div class="listinghdname">%s%s</div></td>',strtolower($this->title),$tophelp,$this->title);
+    $html .= sprintf('<th><a name="%s"></a>%s%s</th>',strtolower($this->title),$tophelp,$this->title);
     $c = 1;
     foreach ($this->columns as $column => $columnname) {
       if ($c == sizeof($this->columns)) {
-        $html .= sprintf('<td><div class="listinghdelement">%s%s</div></td>',$columnname,$this->help);
+        $html .= sprintf('<th>%s%s</th>',$columnname,$this->help);
       } else {
         if ($this->sortby[$columnname] && $this->sort) {
           $display = sprintf('<a href="./?%s&amp;sortby=%s">%s</a>',$this->removeGetParam("sortby"),urlencode($columnname),$columnname);
         } else {
           $display = $columnname;
         }
-        $html .= sprintf('<td><div class="listinghdelement">%s</div></td>',$display);
+        $html .= sprintf('<th>%s</td>',$display);
       }
       $c++;
 

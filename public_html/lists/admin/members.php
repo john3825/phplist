@@ -212,7 +212,7 @@ if (isset($id)) {
         $start = 0;
      }
 
-     printf ('<table border=1><tr><td colspan=4 align=center>%s</td></tr><tr><td>%s</td><td>%s</td><td>
+     printf ('<table class="grid"><tr><td colspan=4 align=center>%s</td></tr><tr><td>%s</td><td>%s</td><td>
           %s</td><td>%s</td></tr></table><p><hr>',
           $listing,
           PageLink2("members","&lt;&lt;","start=0&id=$id"),

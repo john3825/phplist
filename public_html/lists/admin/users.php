@@ -254,7 +254,7 @@ if ($total > MAX_USER_PP) {
   }
   if ($_GET["unconfirmed"])
      $find_url .= "&unconfirmed=".$_GET["unconfirmed"];
-  printf ('<table border=1><tr><td colspan=4 align=center>%s</td></tr><tr><td>%s</td><td>%s</td><td>
+  printf ('<table class="grid"><tr><td colspan=4 align=center>%s</td></tr><tr><td>%s</td><td>%s</td><td>
           %s</td><td>%s</td></tr></table><p><hr>',
           $listing,
           PageLink2("users","&lt;&lt;","start=0".$find_url),
