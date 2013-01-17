@@ -126,8 +126,8 @@ $lan = array (
 
   ### new in 2.9.5
   'Misc' => '雑則',
-  'email to alert when sending of this message starts' => 'このメッセージの送信が始まるとき、アラートする電子メール',
-  'email to alert when sending of this message has finished' => 'このメッセージの送信が完了したとき、アラートする電子メール',
+  'email to alert when sending of this message starts' => 'このメッセージの送信時に通知を送信するメールアドレス',
+  'email to alert when sending of this message has finished' => 'このメッセージの送信完了時に通知を送信するメールアドレス',
   'separate multiple with a comma' => '（複数の場合はカンマ区切りにしてください。）',
   'operator' => 'operator',
   'values' => 'values',

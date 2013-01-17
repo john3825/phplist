@@ -42,7 +42,7 @@ $lan = array(
   'Plugins' => 'プラグイン',
   'Upgrade' => 'アップグレード',
 'Change your details (e.g. password)' => 'Change your details (e.g. password)',
-'You have set TEST in config.php to 1, so it will only show what would be sent' => 'もしあなたが、config.phpのTESTを1に設定しているのであれば、送信されたことだけを表示します。',
+'You have set TEST in config.php to 1, so it will only show what would be sent' => 'config.phpのTESTを1に設定している場合は、送信されたことだけを表示します。',
 
   # added at a later stage
   'setup' => 'セットアップ',

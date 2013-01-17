@@ -1,7 +1,7 @@
 <?php
 
 $lan = array(
-'Running in testmode, no emails will be sent. Check your config file.' => 'Running in testmode, no emails will be sent. Check your config file.',
+'Running in testmode, no emails will be sent. Check your config file.' => 'テストモードで動作しているためメール送信は無効になっています。モード変更はconfigファイルで行います。',
 'The following restrictions have been set by your ISP:' => 'The following restrictions have been set by your ISP:',
 'Script stage' => 'Script stage',
 'Finished, Nothing to do' => 'Finished, Nothing to do',
