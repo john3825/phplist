@@ -1,4 +1,4 @@
-﻿var FCKDragTableHandler =
+var FCKDragTableHandler =
 {
 	"_DragState" : 0,
 	"_LeftCell" : null,
@@ -517,8 +517,13 @@
 				backgroundImage	: 'none',
 				border		: '0'
 			} ) ;
+	},
+	"Reset" : function()
+	{
+		FCKDragTableHandler._LeftCell = FCKDragTableHandler._RightCell = FCKDragTableHandler._TableMap = null ;
 	}
 
 };
 
 FCK.Events.AttachEvent( "OnMouseMove", FCKDragTableHandler.MouseMoveListener ) ;
+FCK.Events.AttachEvent( "OnAfterSetHTML", FCKDragTableHandler.Reset ) ;

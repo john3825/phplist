@@ -1,6 +1,6 @@
-﻿/*
+/*
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net
- * Copyright (C) 2003-2008 Frederico Caldeira Knabben
+ * Copyright (C) 2003-2010 Frederico Caldeira Knabben
  *
  * == BEGIN LICENSE ==
  *
@@ -421,9 +421,6 @@ function OpenServerBrowser( type, url, width, height )
 }
 
 var sActualBrowser ;
-// fix for full URL on uploaded images
-// http://www.flashme.com.au/flashmeblog/web-design-issues/phplist-uploading-images-fckeditor-and-absolute-path-urls/
-var theDomain = 'http://' + location.hostname; 
 
 function SetUrl( url, width, height, alt )
 {
@@ -434,7 +431,7 @@ function SetUrl( url, width, height, alt )
 	}
 	else
 	{
-		GetE('txtUrl').value = theDomain + url ;
+		GetE('txtUrl').value = url ;
 		GetE('txtWidth').value = width ? width : '' ;
 		GetE('txtHeight').value = height ? height : '' ;
 
