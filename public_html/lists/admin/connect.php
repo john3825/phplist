@@ -371,7 +371,7 @@ function Warn($msg) {
 }
 
 function Info($msg) {
-	print '<center><table border=1><tr><td class="error">' . $GLOBALS["I18N"]->get("information") . ": $msg </td></tr></table></center>";
+	print '<center><table><tr><td class="error">' . $GLOBALS["I18N"]->get("information") . ": $msg </td></tr></table></center>";
 }
 
 $main_menu = array (

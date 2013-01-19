@@ -489,7 +489,7 @@ define('DOMAIN_AUTO_THROTTLE',0);
 # admin language
 # if you want to disable the language switch for the admin interface (and run all in english)
 # set this one to 0
-define('LANGUAGE_SWITCH',1);
+define('LANGUAGE_SWITCH',0);
 
 # advanced bounce processing
 # with advanced bounce handling you are able to define regular expressions that match bounces and the
