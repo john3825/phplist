@@ -1154,7 +1154,7 @@ class PHPMailer
      * @return string
      */
     function EncodeHeader ($str, $position = 'text') {
-      $str = mb_encode_mimeheader($str, $this->CharSet, "B");
+      $str = mb_encode_mimeheader($str, $this->CharSet, "B", "\n");
 
       $x = 0;
 
