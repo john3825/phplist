@@ -5,9 +5,9 @@
 <div align=center>
 <table cellspacing=0 cellpadding=0 width=710 border=0>
 <tr>
-<td bgcolor="#000000" rowspan=3><img height=1 alt="" src="images/transparent.png" width=1 border=0></td>
-<td bgcolor="#000000"><img height=1 alt="" src="images/transparent.png" width=708 border=0></td>
-<td bgcolor="#000000" rowspan=3><img height=1 alt="" src="images/transparent.png" width=1 border=0></td>
+<td rowspan=3><img height=1 alt="" src="images/transparent.png" width=1 border=0></td>
+<td><img height=1 alt="" src="images/transparent.png" width=708 border=0></td>
+<td rowspan=3><img height=1 alt="" src="images/transparent.png" width=1 border=0></td>
 </tr>
 
 <tr valign="top" align="left">
@@ -26,13 +26,13 @@
     background="images/topright.png" bgcolor="#F0D1A3"><SPAN
       class=webblermenu>phplist</SPAN></TD></TR>
   <TR>
-    <TD bgColor="#000000"><IMG height=1 alt=""
+    <td><IMG height=1 alt=""
       src="images/transparent.png" width=20
       border=0></TD>
-    <TD bgColor="#000000"><IMG height=1 alt=""
+    <td><IMG height=1 alt=""
       src="images/transparent.png" width=576
       border=0></TD>
-    <TD bgColor="#000000"><IMG height=1 alt=""
+    <td><IMG height=1 alt=""
       src="images/transparent.png" width=132
       border=0></TD></TR>
   <TR vAlign=top>
