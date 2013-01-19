@@ -3,6 +3,7 @@
 # file with common texts for translation
 
 $lan = array(
+  'Running in testmode, no emails will be sent. Check your config file.' => 'テストモードで動作しているためメール送信は無効になっています。モード変更はconfigファイルで行います。',
   'logout' => 'ログアウト',
   'Main Page' => 'メインページ',
   'user' => 'ユーザ',
@@ -152,6 +153,36 @@ $lan = array(
 
   # added 2.10.2
   'globalvulnwarning' => 'あなたのPHPのバージョンは大きなセキュリティーの問題があります。 <br/>PHPの最新バージョンにアップグレードするのがベストです。この問題については<a href="http://www.hardened-php.net/globals-problem">ここ</a>を読んでください。',
+
+  # added 2.10.4
+
+  # note to translators, this is part of a plain text email, so do not use html
+  'spamblockemailintro' => '
+
+--------------------------------------------------------------------------------
+This is a notification of a possible spam attack to your phplist subscribe page.
+The data submitted has been copied below, so you can check whether this was actually the case.
+The submitted data has been converted into non-html characters, for security reasons.
+
+If you want to stop receiving this message, set 
+
+  define(\'NOTIFY_SPAM\',0);
+
+in your phplist config file.
+
+This user has not been added to the database. If there is an error, you will need to 
+add them manually. 
+--------------------------------------------------------------------------------
+
+',
+
+  ## added 2.11.4
+  'entered' => 'entered',
+  'edit' => 'edit',
+  'age' => 'age',
+  'delete' => 'delete',
+  'delete all' => 'delete all',
+
 
 );
 

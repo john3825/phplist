@@ -70,6 +70,10 @@ $lan = array(
   # new in 2.10.1
   'Delete Tagged Users' => 'Tagged ユーザを削除',
 
-
+  # new in 2.11.4
+  'Mark all users on list %s confirmed' => 'Mark all users on list %s confirmed',
+  'Marking all users on list %s confirmed' => 'Marking all users on list %s confirmed',
+  '-All-' => '-All-',
+  'To move all users who are not subscribed to any list to %s' => 'To move all users who are not subscribed to any list to %s',
 );
 ?>

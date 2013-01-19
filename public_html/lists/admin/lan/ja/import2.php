@@ -101,6 +101,9 @@ $lan = array(
 'Make confirmed immediately' => '即座に確定とする',
 'Import' => 'インポート',
 
+## added 2008-05-12
+'phplistuploadlimit' => '<br/>PHPlist will not process files larger than %dMB',
+'Cannot find column with email, please make sure the column is called &quot;email&quot; and not eg e-mail, and that your column delimiter is correct' => 'Cannot find column with email, please make sure the column is called &quot;email&quot; and not eg e-mail, and that your column delimiter is correct',
 
 );
 ?>
