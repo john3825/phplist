@@ -1,14 +1,14 @@
 <?php
 
 $lan = array(
-  'warnemailattribute' => '電子メールはシステム属性です。',
+  'warnemailattribute' => 'メールアドレスはシステム属性です。',
   'converting' => '変換中',
   'from' => 'from',
   'to' => 'to',
   'deleting' => '削除中',
   'cannotdelete' => '属性を削除できません。それは以下のフォームで使われています。:',
   'warninglongtime' => '警告、属性のタイプを変更するには長い時間がかかる場合があります。',
-  'sorrymergingcbgroupnotimplemented' => 'すいません、チェックボックスグループのマージはまだ導入されていません。',
+  'sorrymergingcbgroupnotimplemented' => 'チェックボックスグループのマージはまだ導入されていません。',
   'cannotmergeone' => 'ただ一つの属性がマージできません。',
   'merging' => 'マージ中',
   'into' => 'into',

@@ -45,19 +45,19 @@ $lan = array(
 'duplicate' => '重複',
 'duplicate' => '重複',
 'Duplicate Email' => '重複するメールアドレスル',
-'All the emails already exist in the database and are member of the lists' => '全ての電子メールは既にデータベースに存在してて、リストのメンバーです。',
-'%s emails succesfully imported to the database and added to %d lists.' => '%s の電子メールのデータベースへのインポートが成功し、%d リストに追加されました。',
-'%d emails subscribed to the lists' => '%d の電子メールをもつユーザがリストを購読されました。',
-'%s emails already existed in the database' => '%s の電子メールがデータベースに既に存在します。',
+'All the emails already exist in the database and are member of the lists' => '全てのメールアドレスは既にデータベースに存在しており、リストのメンバーです。',
+'%s emails succesfully imported to the database and added to %d lists.' => '%s のメールアドレスのデータベースへのインポートが成功し、%d リストに追加されました。',
+'%d emails subscribed to the lists' => '%d のメールアドレスをもつユーザがリストを購読されました。',
+'%s emails already existed in the database' => '%s のメールアドレスがデータベースに既に存在します。',
 '%d Invalid Emails found.' => '%d のInvalid Emailが見つかりました。',
-'These records were added, but the email has been made up from ' => 'これらのレコードは追加されましたが、電子メールは次のように作成されました：',
+'These records were added, but the email has been made up from ' => 'これらのレコードは追加されましたが、メールアドレスは次のように作成されました：',
 'These records were deleted. Check your source and reimport the data. Duplicates will be identified.' => 'これらのレコードは重複していました。あなたのソースをチェックしてデータを再度インポートしてください。重複は区別されるでしょう。',
 'User data was updated for %d users' => '%dのユーザのユーザデータが更新されました。',
-'%d users were matched by foreign key, %d by email' => '%d のユーザが外部キーによってマッチしました。%d のユーザが電子メールによってマッチしました。',
+'%d users were matched by foreign key, %d by email' => '%d のユーザが外部キーによってマッチしました。%d のユーザがメールアドレスによってマッチしました。',
 'phplist Import Results' => 'PHPlistインポート結果',
 'Test output<br/>If the output looks ok, click %s to submit for real' => 'テスト出力<br/>もし出力がOKのようでしたら、本当に送信するために%sをクリックしてください。',
 'Confirm Import' => 'インポートの確定',
-'Import some more emails' => 'もう少し電子メールをインポート',
+'Import some more emails' => 'もう少しメールアドレスをインポート',
 'Adding users to list' => 'ユーザをリストに追加中',
 'Select the lists to add the emails to' => 'メールアドレスを追加するリストを選択',
 'No lists available' => '利用可能なリストはありません。',
@@ -65,10 +65,10 @@ $lan = array(
 'Select the groups to add the users to' => 'ユーザを追加するグループを選択',
 'automatically added' => '自動的に追加されました。',
  'importintro' => '<p>アップロードするファイルの最初の行にレコードの属性が記載されている必要があります。
-    電子メールカラムは"email"とつけ、"e-mail"や"Email Address"などではないことを確認してください。
+    メールアドレスカラムは"email"とつけ、"e-mail"や"Email Address"などではないことを確認してください。
     Case is not important.
     </p>
-    もし、"Foreign Key"というカラム名があるなら、これは外部のデータベースとPHPlistデータベースを同期するのに使われます。外部キーは既存のユーザとマッチングするとき優先されます。これはインポート処理を遅くします。これを使うのであれば、電子メールなしでレコードをもつことが許されますが、代わりに"Invalid Email"が作成されます。あなたはそれらのレコードを検索するために"Invalid Email"を検索することができます。外部キーの最小サイズは100です。
+    もし、"Foreign Key"というカラム名があるなら、これは外部のデータベースとPHPlistデータベースを同期するのに使われます。外部キーは既存のユーザとマッチングするとき優先されます。これはインポート処理を遅くします。これを使うのであれば、メールアドレスなしでレコードをもつことが許されますが、代わりに"Invalid Email"が作成されます。あなたはそれらのレコードを検索するために"Invalid Email"を検索することができます。外部キーの最小サイズは100です。
     <br/><br/>
     <b>警告</b>: ファイルはプレーンテキストである必要があります。Wordドキュメントのようなバイナリファイルはアップロードしないでください。
     <br/>',
@@ -76,14 +76,14 @@ $lan = array(
 サーバに送るトータルデータの最小サイズ: <b>%s</b><br/>
 ここのファイルについての最大サイズ: <b>%s</b>
 <br/>PHPlistは1Mbより大きなファイルは処理しません。',
-'testoutput_blurb' => 'もし"テスト出力"をチェックするのでしたら、画面上に分析された電子メールのリストが表示されます。このときデータベースには情報が保存されません。これはファイルが正しいかどうかをみつけることに役立ちます。最初の50レコードのみを表示します。',
+'testoutput_blurb' => 'もし"テスト出力"をチェックするのでしたら、画面上に分析されたメールアドレスのリストが表示されます。このときデータベースには情報が保存されません。これはファイルが正しいかどうかをみつけることに役立ちます。最初の50レコードのみを表示します。',
 'warnings_blurb' => '"警告を表示"をチェックするのであれば、妥当でないレコードの警告を得ることができます。”テスト出力"をチェックすると警告が表示されるだけです。実際にインポート中のときそれらは無視されます。',
-'omitinvalid_blurb' => '"Invalid 省略"をチェックすると、妥当でないレコードは追加されません。妥当でないレコードとは電子メールを持たないレコードです。他の属性は自動的に追加されます。すなわち、もし１レコードについてcountryが見つからないとき、countriesのリストに追加されます。',
-'assigninvalid_blurb' => '"Invalid 割り当て"は、Invalid Emailをもつユーザに電子メールを作成することに使用されます。
-電子メールに値を作成するために、 [ と ] の間の値を使うことができます。例えば、もしあなたのインポートファイルにカラム"First Name"とカラム"Last Name"が含まれていると、ファーストネームとラストネームを含んでいるこのユーザに、電子メールの新規の値を使うために"[first name] [last name]"を利用することができます。
+'omitinvalid_blurb' => '"Invalid 省略"をチェックすると、妥当でないレコードは追加されません。妥当でないレコードとはメールアドレスを持たないレコードです。他の属性は自動的に追加されます。すなわち、もし１レコードについてcountryが見つからないとき、countriesのリストに追加されます。',
+'assigninvalid_blurb' => '"Invalid 割り当て"は、Invalid Emailをもつユーザにメールアドレスを作成することに使用されます。
+メールアドレスに値を作成するために、 [ と ] の間の値を使うことができます。例えば、もしあなたのインポートファイルにカラム"First Name"とカラム"Last Name"が含まれていると、ファーストネームとラストネームを含んでいるこのユーザに、メールアドレスの新規の値を使うために"[first name] [last name]"を利用することができます。
 値[number]はインポートのための連番を挿入する時に使われます。',
 'overwriteexisting_blurb' => 'もしあなたが"既存を上書き"をチェックするのでしたら、データベース内のユーザの情報はインポートされた情報で置換されます。ユーザはメールアドレスまたは外部キーによりマッチされます。',
-'retainold_blurb' => 'もし"古いユーザ電子メールを保持"をチェックするのでしたら、同一である二つのメールアドレスのコンフリクトは、古いメールアドレスをそのまま維持し、新しいメールアドレスに"duplicate"を追加します。もしチェックしないから、古いメールアドレスは"duplicate"となり、新しいメールアドレスが優先されるでしょう。',
+'retainold_blurb' => 'もし「古いメールアドレスを保持」をチェックするのでしたら、同一である二つのメールアドレスのコンフリクトは、古いメールアドレスをそのまま維持し、新しいメールアドレスに"duplicate"を追加します。もしチェックしないから、古いメールアドレスは"duplicate"となり、新しいメールアドレスが優先されるでしょう。',
 'sendnotification_blurb' => 'もし"通知メールを送信する"をチェックするのでしたら、あなたが追加しているユーザは、購読の確定要求を送信され、ユーザは応答しなければいけません。この機能はInvalid Emailを同定しますので、おすすめです。',
 'phplist Import  Results' => 'PHPlistインポート結果',
 'File containing emails' => 'メールアドレスが含まれているファイル',
