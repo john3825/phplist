@@ -9,11 +9,11 @@ switch ($page) {
   case 'editattributes': $page_title = '属性の設定';break;
   case 'editlist': $page_title = 'リストの編集';break;
   case 'checki18n': $page_title = '翻訳があるかチェック';break;
-  case 'import4': $page_title = 'リモートデータベースから電子メールをインポート';break;
-  case 'import3': $page_title = 'IMAPから電子メールをインポート';break;
+  case 'import4': $page_title = 'リモートデータベースからメールアドレスをインポート';break;
+  case 'import3': $page_title = 'IMAPからメールアドレスをインポート';break;
   case 'import2':
   case 'import1':
-  case 'import': $page_title = '電子メールのインポート';break;
+  case 'import': $page_title = 'メールアドレスのインポート';break;
   case 'export': $page_title = 'ユーザのエクスポート';break;
   case 'initialise': $page_title = 'データベースの初期化';break;
   case 'send': $page_title = 'メッセージ送信';break;
@@ -50,6 +50,6 @@ switch ($page) {
   case 'logout': $page_title = 'ログアウト';break;
   case 'mclicks': $page_title = 'メッセージクリック統計'; break;
   case 'uclicks': $page_title = 'URLクリック統計'; break;
-  case 'massunconfirm': $page_title = '電子メールの大量Unconfirm処理';break;
+  case 'massunconfirm': $page_title = 'メールアドレスの大量Unconfirm処理';break;
 }
 ?>

@@ -3,7 +3,7 @@ $lan = array(
   'Resending confirmation request to' => '登録認証を再送信中',
   'user found' => 'ユーザがみつかりました。',
   'no user found' => 'ユーザがみつかりません。',
-  'unable to find original email' => 'オリジナルの電子メールをみつけることができません。',
+  'unable to find original email' => 'オリジナルのメールアドレスをみつけることができません。',
   'Marking all users confirmed' => 'すべてのユーザを confirmed とマーク中',
   'users apply' => 'ユーザが適用',
   'Creating UniqID for all users who do not have one' => 'Creating UniqID for all users who do not have one',
@@ -45,7 +45,7 @@ $lan = array(
   'Mark all users to receive HTML' => 'すべてのユーザをHTMLメールを受信するにマーク',
   'Mark all users to receive text' => 'すべてのユーザをtextメールを受信するにマーク',
   'Mark all users confirmed' => 'すべてのユーザを confirmed にマーク',
-  'Fix emails for users who have an invalid email' => 'Invalid Emailをもつユーザに対し電子メールをFix',
+  'Fix emails for users who have an invalid email' => 'Invalid Emailをもつユーザに対しメールアドレスをFix',
   'Remove Stale entries from the database' => 'データベースから古いエントリーを取り除く',
   'Merge Duplicate Users' => '重複したユーザのマージ',
   'To move all users who are not subscribed to any list to' => 'いかなるリストも購読していないすべてのユーザを次のリストに移動：',
@@ -56,7 +56,7 @@ $lan = array(
   'To resend the request for confirmation to users who signed up and have not confirmed their subscription' => '参加表明したが購読を確定していないユーザに確定のリクエストを再送信します。',
   'Date they signed up after' => '次の期間の後に参加表明した日付',
   'Date they signed up before' => '次の期間の前に参加表明した日付',
-  'Text to prepend to email' => '電子メールの先頭に追加するテキスト',
+  'Text to prepend to email' => 'メールの先頭に追加するテキスト',
   'prependemailtext' => '
 申し訳ありません：現在データベースのメンテナンスを実施しております。
 あなた様から以前、メールマガジンへのご登録を頂いておりますが、

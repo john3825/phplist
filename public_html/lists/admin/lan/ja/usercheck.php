@@ -6,7 +6,7 @@ $lan = array(
   'existcheckintro' => '<p>データベースのユーザの存在をチェックするページ</p>',
   'whatistype' => 'チェックしたい情報のタイプを選択してください。',
   "foreignkey" => "外部キー",
-  "email" => "電子メール",
+  "email" => "メールアドレス",
   "continue" => "続ける",
   "pastevalues" => "以下のボックスに１行１つでチェックする値をペーストしてください。",
 

@@ -5,7 +5,7 @@
 
 $lan = array (
   'noaccess' => 'そのようなメッセージはありません、またはあなたはそれにアクセスしません。',
-  'htmlusedwarning' => '警告: あなたはコンテンツをHTMLでないと指定していましたが、いくつかHTMLタグが使われています。これはエラーを起こすかもしれません。',
+  'htmlusedwarning' => '警告: コンテンツをHTMLでないと指定していましたが、いくつかHTMLタグが使われています。これはエラーを起こすかもしれません。',
   'adding' => '追加中',
   'longmimetype' => 'Mime Type が255文字以上です。これはトラブルとなります。',
   'addingattachment' => '追加された添付ファイル ',
@@ -14,8 +14,8 @@ $lan = array (
   'added' => 'メッセージが追加されました。',
   'queued' => '送信のためにメッセージがキューされました。',
   'processqueue' => 'メッセージキューを処理',
-  'errorsubject' => 'すいません、メールタイトルフィールドに不正な文字が使用されました。',
-  'errorfrom' => 'すいません、Fromフィールドに不正な文字が使用されました。',
+  'errorsubject' => 'メールタイトルフィールドに不正な文字が使用されました。',
+  'errorfrom' => 'Fromフィールドに不正な文字が使用されました。',
   'enterfrom' => 'from行に入力してください。',
   'entermessage' => 'メッセージを入力してください。',
   'entersubject' => 'メールタイトルを入力してください。',
@@ -118,7 +118,7 @@ $lan = array (
   'listnotactive' => 'リストは非アクティブです。',
   'selectexcludelist' => '除外するリストを選択してください。',
   'excludelistexplain' => 'ここで選択したリストのメンバーでなければ、メッセージは上記のリストのメンバーであるユーザに届きます。',
-  'nolistsavailable' => 'すいません、現在利用可能なリストはありません。',
+  'nolistsavailable' => '現在利用可能なリストはありません。',
   'sendmessage' => '選択したメーリングリストにメッセージを送信する',
   'warnnopearhttprequest' => 'リモートURLに送信しようとしているが、PEAR::HTTP/Requestが利用可能ではありません。したがいまして、これは失敗するでしょう。',
   #
