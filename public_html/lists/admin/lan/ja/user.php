@@ -18,14 +18,14 @@ $lan = array(
 'Add a new User' => '新規ユーザ追加',
 'encrypted' => '暗号化済',
 'Save Changes' => '変更を保存する',
-'User is blacklisted. No emails will be sent to this user' => 'ユーザは購読解除済リストに掲載されています。電子メールはこのユーザに対して送信されません。',
+'User is blacklisted. No emails will be sent to this user' => 'ユーザは購読解除済リストに掲載されています。メールはこのユーザに対して送信されません。',
 'Mailinglist Membership' => 'メーリングリストメンバーシップ',
 'Group Membership' => 'グループメンバーシップ',
 'Please select the groups this user is a member of' => 'このユーザがメンバーとなるグループを選択',
 
 # added 2.10.0
 'ID' => 'ID',
-'Email' => '電子メール',
+'Email' => 'メールアドレス',
 'Is this user confirmed' => 'このユーザは 確定済 にしますか？',
 'Is this user blacklisted' => 'このユーザは 購読解除済リスト に掲載されていますか。',
 'Number of bounces on this user' => 'このユーザに関するバウンスの数',
