@@ -15,6 +15,7 @@ $lan = array(
 <li>None: 管理者はこのページを閲覧することができません。</li>
 <li>Owner: 管理者はこのページをみることができるが、自身の所有するリストのコンテンツに限られます。</li>
 </ul>
+<p class="information">Note: Admin Password must be at least 4 characters long</p>
 ',
 'Edit Administrator' => '管理者の編集',
 'Admin Details' => '管理者の詳細',
