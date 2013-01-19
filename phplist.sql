@@ -19,7 +19,7 @@ CREATE TABLE `eventlog` (
   `page` varchar(100) default NULL,
   `entry` text,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `eventlog`
@@ -50,7 +50,7 @@ CREATE TABLE `phplist_admin` (
   `disabled` tinyint(4) default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `loginname` (`loginname`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_admin`
@@ -73,7 +73,7 @@ CREATE TABLE `phplist_admin_attribute` (
   `adminid` int(11) NOT NULL default '0',
   `value` varchar(255) default NULL,
   PRIMARY KEY  (`adminattributeid`,`adminid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_admin_attribute`
@@ -95,7 +95,7 @@ CREATE TABLE `phplist_admin_task` (
   `taskid` int(11) NOT NULL default '0',
   `level` int(11) default NULL,
   PRIMARY KEY  (`adminid`,`taskid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_admin_task`
@@ -122,7 +122,7 @@ CREATE TABLE `phplist_adminattribute` (
   `required` tinyint(4) default NULL,
   `tablename` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_adminattribute`
@@ -147,7 +147,7 @@ CREATE TABLE `phplist_attachment` (
   `description` text,
   `size` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_attachment`
@@ -173,7 +173,7 @@ CREATE TABLE `phplist_bounce` (
   `comment` text,
   PRIMARY KEY  (`id`),
   KEY `dateindex` (`date`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_bounce`
@@ -201,7 +201,7 @@ CREATE TABLE `phplist_bounceregex` (
   `count` int(11) default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `regex` (`regex`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_bounceregex`
@@ -222,7 +222,7 @@ CREATE TABLE `phplist_bounceregex_bounce` (
   `regex` int(11) NOT NULL default '0',
   `bounce` int(11) NOT NULL default '0',
   PRIMARY KEY  (`regex`,`bounce`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_bounceregex_bounce`
@@ -245,7 +245,7 @@ CREATE TABLE `phplist_config` (
   `editable` tinyint(4) default '1',
   `type` varchar(25) default NULL,
   PRIMARY KEY  (`item`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_config`
@@ -269,7 +269,7 @@ CREATE TABLE `phplist_eventlog` (
   `page` varchar(100) default NULL,
   `entry` text,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_eventlog`
@@ -298,7 +298,7 @@ CREATE TABLE `phplist_linktrack` (
   PRIMARY KEY  (`linkid`),
   UNIQUE KEY `messageid` (`messageid`,`userid`,`url`),
   KEY `miduidurlindex` (`messageid`,`userid`,`url`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_linktrack`
@@ -323,7 +323,7 @@ CREATE TABLE `phplist_linktrack_userclick` (
   `data` text,
   `date` datetime default NULL,
   KEY `linkusermessageindex` (`linkid`,`userid`,`messageid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_linktrack_userclick`
@@ -352,7 +352,7 @@ CREATE TABLE `phplist_list` (
   `owner` int(11) default NULL,
   `rssfeed` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_list`
@@ -376,7 +376,7 @@ CREATE TABLE `phplist_listattr_bpleaseche` (
   `listorder` int(11) default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_listattr_bpleaseche`
@@ -399,7 +399,7 @@ CREATE TABLE `phplist_listattr_bwheredoyo` (
   `listorder` int(11) default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_listattr_bwheredoyo`
@@ -423,7 +423,7 @@ CREATE TABLE `phplist_listattr_cbgroup` (
   `listorder` int(11) default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_listattr_cbgroup`
@@ -447,7 +447,7 @@ CREATE TABLE `phplist_listattr_comments` (
   `listorder` int(11) default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_listattr_comments`
@@ -470,7 +470,7 @@ CREATE TABLE `phplist_listattr_countries` (
   `listorder` int(11) default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_listattr_countries`
@@ -494,7 +494,7 @@ CREATE TABLE `phplist_listattr_hiddenfiel` (
   `listorder` int(11) default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_listattr_hiddenfiel`
@@ -517,7 +517,7 @@ CREATE TABLE `phplist_listattr_iagreewith` (
   `listorder` int(11) default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_listattr_iagreewith`
@@ -540,7 +540,7 @@ CREATE TABLE `phplist_listattr_most` (
   `listorder` int(11) default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_listattr_most`
@@ -564,7 +564,7 @@ CREATE TABLE `phplist_listattr_othercomme` (
   `listorder` int(11) default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_listattr_othercomme`
@@ -587,7 +587,7 @@ CREATE TABLE `phplist_listattr_somemoreco` (
   `listorder` int(11) default '0',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_listattr_somemoreco`
@@ -612,7 +612,7 @@ CREATE TABLE `phplist_listmessage` (
   `modified` timestamp NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `messageid` (`messageid`,`listid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_listmessage`
@@ -635,7 +635,7 @@ CREATE TABLE `phplist_listrss` (
   `type` varchar(255) default NULL,
   `entered` datetime default NULL,
   `info` text
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_listrss`
@@ -659,7 +659,7 @@ CREATE TABLE `phplist_listuser` (
   `entered` datetime default NULL,
   `modified` timestamp NOT NULL,
   PRIMARY KEY  (`userid`,`listid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_listuser`
@@ -709,7 +709,7 @@ CREATE TABLE `phplist_message` (
   `repeatuntil` datetime default NULL,
   `textmessage` text,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_message`
@@ -732,7 +732,7 @@ CREATE TABLE `phplist_message_attachment` (
   `messageid` int(11) NOT NULL default '0',
   `attachmentid` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_message_attachment`
@@ -754,7 +754,7 @@ CREATE TABLE `phplist_messagedata` (
   `id` int(11) NOT NULL default '0',
   `data` text,
   PRIMARY KEY  (`name`,`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_messagedata`
@@ -784,7 +784,7 @@ CREATE TABLE `phplist_rssitem` (
   `ashtml` int(11) default '0',
   PRIMARY KEY  (`id`),
   KEY `title` (`title`,`link`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_rssitem`
@@ -807,7 +807,7 @@ CREATE TABLE `phplist_rssitem_data` (
   `tag` varchar(100) NOT NULL default '',
   `data` text,
   PRIMARY KEY  (`itemid`,`tag`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_rssitem_data`
@@ -830,7 +830,7 @@ CREATE TABLE `phplist_rssitem_user` (
   `userid` int(11) NOT NULL default '0',
   `entered` timestamp NOT NULL,
   PRIMARY KEY  (`itemid`,`userid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_rssitem_user`
@@ -855,7 +855,7 @@ CREATE TABLE `phplist_sendprocess` (
   `ipaddress` varchar(50) default NULL,
   `page` varchar(100) default NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_sendprocess`
@@ -879,7 +879,7 @@ CREATE TABLE `phplist_subscribepage` (
   `active` tinyint(4) default '0',
   `owner` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_subscribepage`
@@ -902,7 +902,7 @@ CREATE TABLE `phplist_subscribepage_data` (
   `name` varchar(100) NOT NULL default '',
   `data` text,
   PRIMARY KEY  (`id`,`name`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_subscribepage_data`
@@ -926,7 +926,7 @@ CREATE TABLE `phplist_task` (
   `type` varchar(25) default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `page` (`page`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_task`
@@ -951,7 +951,7 @@ CREATE TABLE `phplist_template` (
   `listorder` int(11) default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `title` (`title`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_template`
@@ -978,7 +978,7 @@ CREATE TABLE `phplist_templateimage` (
   `width` int(11) default NULL,
   `height` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_templateimage`
@@ -1004,7 +1004,7 @@ CREATE TABLE `phplist_urlcache` (
   `content` mediumtext,
   PRIMARY KEY  (`id`),
   KEY `urlindex` (`url`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_urlcache`
@@ -1030,7 +1030,7 @@ CREATE TABLE `phplist_user_attribute` (
   `required` tinyint(4) default NULL,
   `tablename` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_user_attribute`
@@ -1052,7 +1052,7 @@ CREATE TABLE `phplist_user_blacklist` (
   `email` varchar(255) NOT NULL default '',
   `added` datetime default NULL,
   UNIQUE KEY `email` (`email`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_user_blacklist`
@@ -1075,7 +1075,7 @@ CREATE TABLE `phplist_user_blacklist_data` (
   `name` varchar(100) default NULL,
   `data` text,
   UNIQUE KEY `email` (`email`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_user_blacklist_data`
@@ -1101,7 +1101,7 @@ CREATE TABLE `phplist_user_message_bounce` (
   `time` timestamp NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `user` (`user`,`message`,`bounce`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_user_message_bounce`
@@ -1127,7 +1127,7 @@ CREATE TABLE `phplist_user_message_forward` (
   `time` timestamp NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `user` (`user`,`message`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_user_message_forward`
@@ -1148,7 +1148,7 @@ CREATE TABLE `phplist_user_rss` (
   `userid` int(11) NOT NULL default '0',
   `last` datetime default NULL,
   PRIMARY KEY  (`userid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_user_rss`
@@ -1186,7 +1186,7 @@ CREATE TABLE `phplist_user_user` (
   UNIQUE KEY `email` (`email`),
   KEY `fkey` (`foreignkey`),
   KEY `index_uniqid` (`uniqid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_user_user`
@@ -1213,7 +1213,7 @@ CREATE TABLE `phplist_user_user_attribute` (
   KEY `attindex` (`attributeid`),
   KEY `userattid` (`attributeid`,`userid`),
   KEY `attuserid` (`userid`,`attributeid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_user_user_attribute`
@@ -1240,7 +1240,7 @@ CREATE TABLE `phplist_user_user_history` (
   `detail` text,
   `systeminfo` text,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_user_user_history`
@@ -1268,7 +1268,7 @@ CREATE TABLE `phplist_usermessage` (
   KEY `userindex` (`userid`),
   KEY `messageindex` (`messageid`),
   KEY `enteredindex` (`entered`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_usermessage`
@@ -1295,7 +1295,7 @@ CREATE TABLE `phplist_userstats` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `entry` (`unixdate`,`item`,`listid`),
   KEY `listdateindex` (`listid`,`unixdate`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Dumping data for table `phplist_userstats`
