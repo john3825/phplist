@@ -12,7 +12,7 @@ General settings for language and database
 
 mb_language("Japanese");
 mb_internal_encoding("UTF-8");
-
+date_default_timezone_set('Asia/Tokyo');
 
 # select the language module to use
 # Look for <country>.inc files in the texts directory
