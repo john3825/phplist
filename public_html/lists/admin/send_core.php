@@ -73,7 +73,7 @@ if (!isset($_GET['tab'])) $_GET['tab'] = '';
 if (!$id) {
   $defaulttemplate = getConfig('defaultmessagetemplate');
   Sql_Query(sprintf('insert into %s (subject,status,entered,sendformat,embargo,repeatuntil,owner,template,tofield,replyto)
-    values("(no subject)","draft",now(),"HTML",now(),now(),%d,%d,"","")',$GLOBALS["tables"]["message"],$_SESSION["logindetails"]["id"],$defaulttemplate));
+    values("(no subject)","draft",now(),"text",now(),now(),%d,%d,"","")',$GLOBALS["tables"]["message"],$_SESSION["logindetails"]["id"],$defaulttemplate));
   $id = Sql_Insert_id();
   # 0008720: Using -p send from the commandline doesn't seem to work
   if(!$GLOBALS["commandline"]){
