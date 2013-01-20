@@ -159,7 +159,7 @@ function sendError($msg, $email = "") {
 
 function Warn($msg) {
 	logError("Warning: $msg");
-  return "<table border=1><tr><td><font color=red>Warning: $msg</font></td></tr></table>";
+  return "<table class=\"grid\"><tr><td><font color=red>Warning: $msg</font></td></tr></table>";
 }
 
 function Info($msg) {

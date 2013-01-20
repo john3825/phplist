@@ -817,13 +817,13 @@ function smartDebug($variable, $description = 'Value', $nestingLevel = 0) {
 #
 #
 function PageData($id) {
-	global $tables;
+	global $tables,$strSubscribeButton;
 	$req = Sql_Query(sprintf('select * from %s where id = %d', $tables["subscribepage_data"], $id));
 	if (!Sql_Affected_Rows()) {
 		$data = array ();
 		$data["header"] = getConfig("pageheader");
 		$data["footer"] = getConfig("pagefooter");
-		$data["button"] = 'Subscribe';
+		$data["button"] = $strSubscribeButton;
 		$data['attributes'] = '';
 		$req = Sql_Query(sprintf('select * from %s order by listorder', $GLOBALS['tables']['attribute']));
 		while ($row = Sql_Fetch_Array($req)) {

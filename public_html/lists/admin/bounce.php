@@ -135,7 +135,7 @@ if ($id) {
     print '<p><a href="#newrule">'.$GLOBALS['I18N']->get('Create New Rule based on this bounce').'</a></p>';
   }
   
-  print "<p>".$GLOBALS['I18N']->get('BounceDetails')."<table border=1>";
+  print "<p>".$GLOBALS['I18N']->get('BounceDetails')."<table class=\"grid\">";
   printf ('
   <tr><td valign="top">'.$GLOBALS['I18N']->get('ID').'</td><td valign="top">%d</td></tr>
   <tr><td valign="top">'.$GLOBALS['I18N']->get('Date').'</td><td valign="top">%s</td></tr>

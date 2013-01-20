@@ -308,7 +308,7 @@ else {
 $c= 0;
 while ($row = Sql_Fetch_array($res)) {
 	$c++;
-  print '<table border=1><tr><td colspan=2>'.
+  print '<table class="grid"><tr><td colspan=2>'.
   $GLOBALS['I18N']->get('attribute').':'. $row["id"];
   if ($formtable_exists) {
     sql_query("select * from formfield where attribute = ".$row["id"]);
@@ -350,7 +350,7 @@ if ($c) {
 print '
 <a name="new"></a>
 <h3>'.$GLOBALS['I18N']->get('addnew').':</h3>
-<table border=1>
+<table class="grid">
 <tr><td colspan=2>'.$GLOBALS['I18N']->get('name').': </td><td colspan=2><input type=text name="name[0]" value="" size=40></td></tr>
 <tr><td colspan=2>'.$GLOBALS['I18N']->get('type').': </td><td colspan=2><select name="type[0]">';
 foreach($types as $key => $val) {

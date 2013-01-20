@@ -15,7 +15,7 @@
 <!--TOP TABLE starts-->
 <TABLE cellSpacing=0 cellPadding=0 width=708 bgColor=#ffffff border=0>
   <TR vAlign=top>
-    <TD colSpan=2 rowspan="2" height="63" background="images/topstrip.png"><a href="http://www.phplist.com" target="_blank"><img src="images/masthead.png" border=0 width=577 height=75></a></TD>
+    <TD colSpan=2 rowspan="2" height="63" background="images/topstrip.png"><a href="index.php"><img src="images/masthead.png" border=0 width=577 height=75></a></TD>
     <TD align=left
       background="images/topstrip.png" bgcolor="#F0D1A3"><FONT
       size=-2>&nbsp;<I>powered by: </I><BR>&nbsp;<B>[<A class=powered

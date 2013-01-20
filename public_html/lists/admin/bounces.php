@@ -54,7 +54,7 @@ if ($total > MAX_USER_PP) {
     $limit = "limit 0,50";
     $s = 0;
   }
-  printf ('<table border=1><tr><td colspan=4 align=center>%s</td></tr><tr><td>%s</td><td>%s</td><td>
+  printf ('<table class="grid"><tr><td colspan=4 align=center>%s</td></tr><tr><td>%s</td><td>%s</td><td>
           %s</td><td>%s</td></tr></table><p><hr>',
           $listing,
           PageLink2("bounces","&lt;&lt;","s=0".$find_url),

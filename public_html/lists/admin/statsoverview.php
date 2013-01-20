@@ -108,7 +108,7 @@ if ($id) {
 }
 print $total. " ".$GLOBALS['I18N']->get("Entries")."</p>";
 if ($total) {
-  printf ('<table border=1><tr><td colspan=4 align=center>%s</td></tr><tr><td>%s</td><td>%s</td><td>
+  printf ('<table class="grid"><tr><td colspan=4 align=center>%s</td></tr><tr><td>%s</td><td>%s</td><td>
           %s</td><td>%s</td></tr></table><p><hr>',
           $listing,
           PageLink2("mviews$url_keep","&lt;&lt;","start=0"),

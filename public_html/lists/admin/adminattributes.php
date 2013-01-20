@@ -77,7 +77,7 @@ else {
 }
 while ($row = Sql_Fetch_array($res)) {
   ?>
-  <table border=1>
+  <table class="grid">
   <tr><td colspan=2><?php echo $GLOBALS['I18N']->get('Attribute').$row["id"] ?></td><td colspan=2><?php echo $GLOBALS['I18N']->get('Delete'); ?> <input type="checkbox" name="delete[<?php echo $row["id"] ?>]" value="1"></td></tr>
   <tr><td colspan=2><?php echo $GLOBALS['I18N']->get('Name'); ?> </td><td colspan=2><input type=text name="name[<?php echo $row["id"]?>]" value="<?php echo htmlspecialchars(stripslashes($row["name"])) ?>" size=40></td></tr>
   <tr><td colspan=2><?php echo $GLOBALS['I18N']->get('Type'); ?> </td><td colspan=2><input type=hidden name="type[<?php echo $row["id"]?>]" value="<?php echo $row["type"]?>"><?php echo $row["type"]?></td></tr>
@@ -89,7 +89,7 @@ while ($row = Sql_Fetch_array($res)) {
 
 <a name="new"></a>
 <h3><?php echo $GLOBALS['I18N']->get('AddAttr'); ?></h3>
-<table border=1>
+<table class="grid">
 <tr><td colspan=2><?php echo $GLOBALS['I18N']->get('Name'); ?> </td><td colspan=2><input type=text name="name[0]" value="" size=40></td></tr>
 <tr><td colspan=2><?php echo $GLOBALS['I18N']->get('Type'); ?> </td><td colspan=2><select name="type[0]">
 <?php

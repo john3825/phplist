@@ -237,5 +237,7 @@ a:active.listingname,
 a:visited.listingname  { color : #999966;background-color : #ffffff; font-weight: bold; text-align : middle; text-decoration : none; display:block;}
 a:hover.listingname {color: #666633;}
 
-table.grid {border-collapse:collapse;}
-table.grid td {border:1px solid #ccc; padding:8px;}
+table.grid {border-collapse:collapse;width:98%;}
+table.grid td,
+table.grid th {border:1px solid #ccc; padding:8px;}
+table.grid th {background-color:#eee;color:#444;}

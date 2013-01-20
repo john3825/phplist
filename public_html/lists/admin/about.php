@@ -1,5 +1,5 @@
 <div align=center>
-<table width="75%" border=1 cellspacing=5 cellpadding=5>
+<table class="grid">
 <tr><td colspan="2" class="abouthead"><?php echo NAME?></td></tr>
 <tr><td width=50 valign=top>Powered by <a href="http://www.phplist.com" target="_blank">phplist</a>, version <?php echo VERSION?> <a href="http://www.phplist.com" target="_blank"><br/><br/><img src="../images/power-phplist.png" width=70 height=30 border=0></a></td>
 <td valign=top>

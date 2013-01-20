@@ -121,7 +121,7 @@ if ($id) {
   print $GLOBALS['I18N']->get('Add a new Administrator');
 }
 print "<br/>";
-print '<p>'.$GLOBALS['I18N']->get('Admin Details').':'.formStart().'<table border=1>';
+print '<p>'.$GLOBALS['I18N']->get('Admin Details').':'.formStart().'<table class="grid">';
 printf('<input type=hidden name="id" value="%d">',$id);
 
 reset($struct);
@@ -131,16 +131,16 @@ while (list ($key,$val) = each ($struct)) {
   if (strstr($val[1],':'))
     list($a,$b) = explode(":",$val[1]);
   if ($a == "sys")
-    printf('<tr><td>%s</td><td>%s</td></tr>',$GLOBALS['I18N']->get($b),$data[$key]);
+    printf('<tr><th>%s</th><td>%s</td></tr>',$GLOBALS['I18N']->get($b),$data[$key]);
   elseif ($key == "loginname" && $data[$key] == "admin") {
-    printf('<tr><td>'.$GLOBALS['I18N']->get('Login Name').'</td><td>admin</td></tr>');
+    printf('<tr><th>'.$GLOBALS['I18N']->get('Login Name').'</th><td>admin</td></tr>');
     print('<input type=hidden name="loginname" value="admin">');
   } elseif ($key == "superuser" || $key == "disabled") {
     if ($accesslevel == "all") {
-      printf('<tr><td>%s</td><td><input type="text" name="%s" value="%s" size=30></td></tr>'."\n",$GLOBALS['I18N']->get($val[1]),$key,stripslashes($data[$key]));
+      printf('<tr><th>%s</th><td><input type="text" name="%s" value="%s" size=30></td></tr>'."\n",$GLOBALS['I18N']->get($val[1]),$key,stripslashes($data[$key]));
     }
   } elseif (!empty($val[1]) && !strpos($key,'_')) {
-    printf('<tr><td>%s</td><td><input type="text" name="%s" value="%s" size=30></td></tr>'."\n",$GLOBALS['I18N']->get($val[1]),$key,stripslashes($data[$key]));
+    printf('<tr><th>%s</th><td><input type="text" name="%s" value="%s" size=30></td></tr>'."\n",$GLOBALS['I18N']->get($val[1]),$key,stripslashes($data[$key]));
   }
 }
 $res = Sql_Query("select
@@ -176,7 +176,7 @@ print '<tr><td colspan=2><input type=submit name=change value="'.$GLOBALS['I18N'
 # what pages can this administrator see:
 if (!$data["superuser"] && $accesslevel == "all") {
   print $I18N->get('strAccessExplain');
-  print '<p>'.$GLOBALS['I18N']->get('Access Details').':</p><table border=1>';
+  print '<p>'.$GLOBALS['I18N']->get('Access Details').':</p><table class="grid">';
   reset($access_levels);
   printf ('<tr><td colspan="%d" align=center>'.$GLOBALS['I18N']->get('Access Privileges').'</td></tr>',sizeof($access_levels)+2);
   print '<tr><td>'.$GLOBALS['I18N']->get('Type').'</td><td>'.$GLOBALS['I18N']->get('Page')."</td>\n";
