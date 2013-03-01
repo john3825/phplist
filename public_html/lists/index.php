@@ -120,6 +120,7 @@ if (isset($_REQUEST['id']) && $_REQUEST["id"]){
 }
 # make sure the subscribe page still exists
 $req = Sql_fetch_row_query(sprintf('select id from %s where id = %d',$tables["subscribepage"],$id));
+if(count($req)<1) header('Location: ./admin/');
 $id = $req[0];
 $msg = "";
 
